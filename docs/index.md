@@ -6,32 +6,22 @@
 
 SOLPREDS is a lightning-fast prediction market built on Solana. Bet on SOL price movements, earn rewards, and compete with traders worldwide.
 
-[Get Started](guide/how-to-play.md){ .md-button .md-button--primary }
-[API Docs](developers/quickstart.md){ .md-button }
+<div class="grid" markdown>
+
+[Get Started :material-rocket-launch:](guide/how-to-play.md){ .md-button .md-button--primary }
+
+[API Docs :material-code-braces:](developers/quickstart.md){ .md-button }
+
+</div>
 
 ---
 
 ## ⚡ Features
 
-<div class="grid cards" markdown>
-
-- **Lightning Fast**
-
-    Built on Solana for near-instant transactions and low fees
-
-- **Simple & Fair**
-
-    Just UP or DOWN. Winner-take-all pool system
-
-- **Non-Custodial**
-
-    Your wallet, your keys. All bets on-chain
-
-- **Real-Time Data**
-
-    Powered by Pyth Network oracle
-
-</div>
+- **Lightning Fast** - Built on Solana for near-instant transactions and low fees
+- **Simple & Fair** - Just UP or DOWN. Winner-take-all pool system
+- **Non-Custodial** - Your wallet, your keys. All bets on-chain
+- **Real-Time Data** - Powered by Pyth Network oracle
 
 ---
 

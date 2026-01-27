@@ -4,7 +4,7 @@ site_description: Solana prediction market - Predict anything. Win everything. O
 
 theme:
   name: material
-  logo: assets/images/logo.png
+  logo: logo: assets/images/logo-small.png
   favicon: assets/images/favicon.ico
   palette:
     scheme: slate
