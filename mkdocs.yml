@@ -1,0 +1,59 @@
+site_name: SOLPREDS Documentation
+site_url: https://docs.solpreds.fun
+site_description: Solana prediction market - Predict anything. Win everything. On-chain.
+
+theme:
+  name: material
+  logo: assets/images/logo.png
+  favicon: assets/images/favicon.ico
+  palette:
+    scheme: slate
+    primary: green
+    accent: lime
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Guide:
+      - Introduction: guide/introduction.md
+      - How To Play: guide/how-to-play.md
+      - Roadmap: guide/roadmap.md
+  - Developers:
+      - Quickstart: developers/quickstart.md
+      - API Reference: developers/api-reference.md
+      - WebSocket: developers/websocket.md
+      - Code Examples: developers/examples.md
+      - Official Links: developers/official-links.md
+  - About: about.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - admonition
+  - tables
+
+extra:
+  social:
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/SOLPREDS_FUN
+      name: Follow us on X
+    - icon: fontawesome/brands/telegram
+      link: https://t.me/SOLPREDS
+      name: Join our Telegram
+    - icon: fontawesome/solid/globe
+      link: https://SOLPREDS.FUN
+      name: Visit SOLPREDS
+
+plugins:
+  - search
