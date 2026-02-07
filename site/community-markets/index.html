@@ -1,0 +1,1844 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Solana prediction market - Predict anything. Win everything. On-chain.">
+      
+      
+      
+        <link rel="canonical" href="https://docs.solpreds.fun/community-markets/">
+      
+      
+        <link rel="prev" href="../presale/">
+      
+      
+        <link rel="next" href="../airdrop/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Community Markets - SOLPREDS Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="lime">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#community-prediction-markets" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="SOLPREDS Documentation" class="md-header__button md-logo" aria-label="SOLPREDS Documentation" data-md-component="logo">
+      
+  <img src="../assets/images/logo-small.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SOLPREDS Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Community Markets
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../guide/introduction/" class="md-tabs__link">
+          
+  
+  
+  Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../developers/quickstart/" class="md-tabs__link">
+          
+  
+  
+  Developers
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../presale/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Presale
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Community Markets
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../airdrop/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Airdrop
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SOLPREDS Documentation" class="md-nav__button md-logo" aria-label="SOLPREDS Documentation" data-md-component="logo">
+      
+  <img src="../assets/images/logo-small.png" alt="logo">
+
+    </a>
+    SOLPREDS Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/how-to-play/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How To Play
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developers/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developers/api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developers/websocket/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WebSocket
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developers/examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developers/official-links/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Official Links
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../presale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Presale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Markets
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Community Markets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-innovation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Innovation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Innovation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparison-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-memecoin-problem-solved" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Memecoin Problem - SOLVED
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Memecoin Problem - SOLVED">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#traditional-memecoins-pumpfun" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traditional Memecoins (Pump.fun)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solpreds-community-markets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SOLPREDS Community Markets
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How It Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-market-creation-permissionless" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Market Creation (Permissionless)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-bonding-curve-trading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Bonding Curve Trading
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-resolution-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Resolution System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-resolution-system_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Resolution System
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Resolution System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-proposal-6-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Proposal (6 hours)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-dispute-window-6-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: Dispute Window (6 hours)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-community-vote-24-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: Community Vote (24 hours)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-settlement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4: Settlement
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scenario-1-undisputed-90-of-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario 1 - Undisputed (90% of cases):
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fee-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fee Structure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fee Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trading-fees-3-total" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trading Fees (3% total)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#winning-fees-5-total" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Winning Fees (5% total)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why This Matters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-creators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Creators
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-traders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Traders
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-the-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For the Ecosystem
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-markets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Markets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launch-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Launch Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-involved" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Involved
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../airdrop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Airdrop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-innovation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Innovation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Innovation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparison-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-memecoin-problem-solved" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Memecoin Problem - SOLVED
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Memecoin Problem - SOLVED">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#traditional-memecoins-pumpfun" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traditional Memecoins (Pump.fun)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solpreds-community-markets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SOLPREDS Community Markets
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How It Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-market-creation-permissionless" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Market Creation (Permissionless)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-bonding-curve-trading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Bonding Curve Trading
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-resolution-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Resolution System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-resolution-system_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Resolution System
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Resolution System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-proposal-6-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Proposal (6 hours)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-dispute-window-6-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: Dispute Window (6 hours)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-community-vote-24-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: Community Vote (24 hours)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-settlement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 4: Settlement
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scenario-1-undisputed-90-of-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario 1 - Undisputed (90% of cases):
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fee-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fee Structure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fee Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trading-fees-3-total" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trading Fees (3% total)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#winning-fees-5-total" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Winning Fees (5% total)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why This Matters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-creators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Creators
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-traders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Traders
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-the-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For the Ecosystem
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-markets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Markets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launch-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Launch Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-involved" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Involved
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="community-prediction-markets">Community Prediction Markets</h1>
+<p><strong>Create markets. Trade outcomes. Earn from volume.</strong></p>
+<p>!!!  "Status: BETA"
+    Community Markets is currently in testing phase. Coming soon to mainnet!</p>
+<hr />
+<h2 id="the-innovation">The Innovation</h2>
+<p>SOLPREDS Community Markets combines the best of <strong>Pump.fun</strong> and <strong>Polymarket</strong> to solve the memecoin problem.</p>
+<h3 id="comparison-table">Comparison Table</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Pump.fun</th>
+<th>Polymarket</th>
+<th>Kalshi</th>
+<th><strong>SOLPREDS Markets</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Asset Type</strong></td>
+<td>Memecoins</td>
+<td>Predictions</td>
+<td>Predictions</td>
+<td>Predictions</td>
+</tr>
+<tr>
+<td><strong>Price Driver</strong></td>
+<td>Hype/Narrative</td>
+<td>Real Events</td>
+<td>Real Events</td>
+<td>✅ Real Events</td>
+</tr>
+<tr>
+<td><strong>Creator Earnings</strong></td>
+<td>&gt;0.8% of volume</td>
+<td>None</td>
+<td>None</td>
+<td>✅ 1% volume</td>
+</tr>
+<tr>
+<td><strong>Bonding Curve</strong></td>
+<td>✅ Yes</td>
+<td>❌ Order Book</td>
+<td>❌ Order Book</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>Permissionless</strong></td>
+<td>✅ Yes</td>
+<td>❌ Curated</td>
+<td>❌ Regulated</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>Dev Risk</strong></td>
+<td>High (rugpulls)</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>✅ Low</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="the-memecoin-problem-solved">The Memecoin Problem - SOLVED</h2>
+<h3 id="traditional-memecoins-pumpfun">Traditional Memecoins (Pump.fun)</h3>
+<p>❌ Price depends on team/narrative/hype<br />
+❌ Developers blamed for price crashes<br />
+❌ Community anger when tokens dump<br />
+❌ No sustainable value for creators<br />
+❌ High risk of rugpulls  </p>
+<h3 id="solpreds-community-markets">SOLPREDS Community Markets</h3>
+<p>✅ Outcome depends on <strong>REAL WORLD EVENTS</strong><br />
+✅ Creators earn from <strong>volume, not price</strong><br />
+✅ No blowback - market resolves based on <strong>facts</strong><br />
+✅ Sustainable creator revenue (1% trades + 2% winnings)<br />
+✅ Price reflects <strong>probability, not hype</strong>  </p>
+<div class="admonition example">
+<p class="admonition-title">Example Comparison</p>
+<p><strong>Pump.fun:</strong> "price faces infinite volatility, many tokens inevitably pump &amp; dump"<br />
+→ Price based on belief in team/community</p>
+<p><strong>SOLPREDS:</strong> "Will BTC hit $100K by March?"<br />
+→ Outcome is objective, verifiable, real</p>
+</div>
+<hr />
+<h2 id="how-it-works">How It Works</h2>
+<h3 id="1-market-creation-permissionless">1. Market Creation (Permissionless)</h3>
+<p>Anyone can create a YES/NO prediction market:</p>
+<ul>
+<li><strong>Cost:</strong> 0.1 SOL</li>
+<li><strong>Creator earns:</strong> 1% of all trading volume + 2% of winner payouts</li>
+<li><strong>No liquidity needed:</strong> Bonding curve handles everything
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Example: &quot;Will Elon buy Microsoft by 2026?&quot;
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Creator spends: 0.1 SOL
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Market attracts: 1,000 SOL in trading volume
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Creator earns: 10 SOL (1% of volume) + 2% of final payouts
+</code></pre></div></li>
+</ul>
+<hr />
+<h3 id="2-bonding-curve-trading">2. Bonding Curve Trading</h3>
+<p>Markets use a <strong>constant product AMM</strong> (like Uniswap):</p>
+<p>$$k = yes_{liquidity} \times no_{liquidity} = 1,000,000$$</p>
+<p><strong>How prices work:</strong></p>
+<ul>
+<li>Initial state: YES = 50%, NO = 50%</li>
+<li>Someone buys YES → YES price increases, NO decreases</li>
+<li>Always: YES% + NO% = 100%</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Live Price Discovery</p>
+<p>Prices automatically adjust based on real demand. No order books, no matching - instant execution!</p>
+</div>
+<p><strong>Visual Example:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Market: &quot;Will BTC hit $100K by March 1?&quot;
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Initial:  YES: 50%  |  NO: 50%
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Alice buys 100 SOL of YES
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>→ YES: 59%  |  NO: 41%
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>Bob buys 50 SOL of NO
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>→ YES: 53%  |  NO: 47%
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>Market reflects real-time probability!
+</code></pre></div></p>
+<hr />
+<h3 id="3-resolution-system">3. Resolution System</h3>
+<p>Markets resolve through <strong>decentralized voting</strong>:</p>
+<h3 id="3-resolution-system_1">3. Resolution System</h3>
+<p>Markets resolve through a <strong>multi-phase process</strong> with dispute protection:</p>
+<h4 id="phase-1-proposal-6-hours">Phase 1: Proposal (6 hours)</h4>
+<ul>
+<li>Anyone stakes $200 in $SOLPREDS tokens and proposes outcome (YES or NO)</li>
+<li>6-hour dispute window begins</li>
+<li>If correct and no dispute, proposer earns 0.5% of pot</li>
+</ul>
+<h4 id="phase-2-dispute-window-6-hours">Phase 2: Dispute Window (6 hours)</h4>
+<p><strong>Two possible paths:</strong></p>
+<p><strong>Path A - No Dispute (Most Common):</strong>
+- No one challenges the proposal
+- After 6 hours, market automatically finalizes with proposed outcome
+- Winners can claim payouts
+- Proposer gets stake back + 0.5% reward from winning amount</p>
+<p><strong>Path B - Disputed:</strong>
+- Someone disagrees and matches the $200 stake
+- Proposes opposite outcome (e.g., if original said YES, dispute says NO)
+- Triggers community voting period from SOLPREDS holders</p>
+<h4 id="phase-3-community-vote-24-hours">Phase 3: Community Vote (24 hours)</h4>
+<p><strong>Only happens if disputed:</strong>
+- All $SOLPREDS token holders can vote
+- Votes weighted by token balance (1 token = 1 vote)
+- 5% quorum required (5% of total supply must vote)
+- Winning side determined by majority</p>
+<p><strong>Vote Resolution:</strong>
+- Winning voters share 25% of losing staker's $200 stake
+- Winning staker gets their $200 back + 50% of loser's stake ($100)
+- 25% of loser's stake burned</p>
+<h4 id="phase-4-settlement">Phase 4: Settlement</h4>
+<ul>
+<li>Market resolves based on proposal (if undisputed) or vote result (if disputed)</li>
+<li>Winners claim payouts (minus 5% fee)</li>
+<li>Losers get $0</li>
+<li>Fees split: Creator (2%) + Platform (2.5%) + validator (0.5%)</li>
+</ul>
+<hr />
+<p><strong>Example Flow:</strong></p>
+<h2 id="scenario-1-undisputed-90-of-cases"><strong>Scenario 1 - Undisputed (90% of cases):</strong></h2>
+<h2 id="fee-structure">Fee Structure</h2>
+<h3 id="trading-fees-3-total">Trading Fees (3% total)</h3>
+<ul>
+<li><strong>1%</strong> → Market creator</li>
+<li><strong>2%</strong> → Platform</li>
+</ul>
+<h3 id="winning-fees-5-total">Winning Fees (5% total)</h3>
+<ul>
+<li><strong>2%</strong> → Market creator</li>
+<li><strong>2.5%</strong> → Platform</li>
+<li><strong>0.5%</strong> → Validator</li>
+</ul>
+<div class="admonition success">
+<p class="admonition-title">Creator Benefits</p>
+<p>Creators earn passively from every trade AND from final settlements. The more popular your market, the more you earn! Validaors earn from solving markets.</p>
+</div>
+<hr />
+<h2 id="why-this-matters">Why This Matters</h2>
+<h3 id="for-creators">For Creators</h3>
+<p>✅ <strong>Sustainable income</strong> from volume<br />
+✅ <strong>No price risk</strong> - earn regardless of outcome<br />
+✅ <strong>No community blowback</strong> - not your fault if wrong side wins<br />
+✅ <strong>Permissionless</strong> - create any market instantly  </p>
+<h3 id="for-traders">For Traders</h3>
+<p>✅ <strong>Fair prices</strong> - bonding curve, not market makers<br />
+✅ <strong>Instant execution</strong> - no waiting for orders<br />
+✅ <strong>Real outcomes</strong> - not dependent on dev actions<br />
+✅ <strong>Transparent resolution</strong> - community-driven  </p>
+<h3 id="for-the-ecosystem">For the Ecosystem</h3>
+<p>✅ <strong>Solves rugpull problem</strong> - no dev control over outcomes<br />
+✅ <strong>Aligns incentives</strong> - creators want high volume, not price manipulation<br />
+✅ <strong>Brings legitimacy</strong> - outcomes based on real events<br />
+✅ <strong>Scalable</strong> - anyone can create markets on anything  </p>
+<hr />
+<h2 id="example-markets">Example Markets</h2>
+<div class="admonition example">
+<p class="admonition-title">Popular Market Ideas</p>
+<ul>
+<li>"Will BTC hit $100K in Q1 2026?"</li>
+<li>"Will Trump announce presidential run by March?"</li>
+<li>"Will Nvidia reach $1T market cap this year?"</li>
+<li>"Will SOL flip ETH in TVL by 2026?"</li>
+<li>"Will GPT-5 launch in 2026?"</li>
+</ul>
+</div>
+<hr />
+<h2 id="launch-status">Launch Status</h2>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Smart Contract Development</td>
+<td>🟡 In Progress</td>
+</tr>
+<tr>
+<td>Bonding Curve Testing</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td>Resolution System</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td>UI/UX Design</td>
+<td>🟡 In Progress</td>
+</tr>
+<tr>
+<td>Security Audit</td>
+<td>⏳ Pending</td>
+</tr>
+<tr>
+<td>Mainnet Launch</td>
+<td>⏳ Q2 2026</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="get-involved">Get Involved</h2>
+<div class="admonition info">
+<p class="admonition-title">Join the Beta</p>
+<p>Want to test Community Markets before launch?</p>
+<ul>
+<li>Join our <a href="https://t.me/SOLPREDS">Telegram</a></li>
+<li>Follow updates on <a href="https://x.com/SOLPREDS_FUN">X</a></li>
+<li>Check <a href="https://markets.solpreds.fun/dev">dev environment</a></li>
+</ul>
+</div>
+<hr />
+<p><a class="md-button" href="../">Back to Home</a>
+<a class="md-button md-button--primary" href="https://solpreds.fun">View Main Platform</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://x.com/SOLPREDS_FUN" target="_blank" rel="noopener" title="Follow us on X" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M357.2 48h70.6L273.6 224.2 455 464H313L201.7 318.6 74.5 464H3.8l164.9-188.5L-5.2 48h145.6l100.5 132.9zm-24.8 373.8h39.1L119.1 88h-42z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://t.me/SOLPREDS" target="_blank" rel="noopener" title="Join our Telegram" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M256 8a248 248 0 1 0 0 496 248 248 0 1 0 0-496m115 168.7c-3.7 39.2-19.9 134.4-28.1 178.3-3.5 18.6-10.3 24.8-16.9 25.4-14.4 1.3-25.3-9.5-39.3-18.7-21.8-14.3-34.2-23.2-55.3-37.2-24.5-16.1-8.6-25 5.3-39.5 3.7-3.8 67.1-61.5 68.3-66.7.2-.7.3-3.1-1.2-4.4s-3.6-.8-5.1-.5c-2.2.5-37.1 23.5-104.6 69.1-9.9 6.8-18.9 10.1-26.9 9.9-8.9-.2-25.9-5-38.6-9.1-15.5-5-27.9-7.7-26.8-16.3.6-4.5 6.7-9 18.4-13.7 72.3-31.5 120.5-52.3 144.6-62.3 68.9-28.6 83.2-33.6 92.5-33.8 2.1 0 6.6.5 9.6 2.9 2 1.7 3.2 4.1 3.5 6.7.5 3.2.6 6.5.4 9.8z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://SOLPREDS.FUN" target="_blank" rel="noopener" title="Visit SOLPREDS" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M351.9 280H161c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zm-191-48h190.9c-2.8-64.5-17.1-123.9-37.4-167.4-11.4-24.4-23.7-41.8-35.1-52.4C268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4m-48 0c3.5-85.6 25.6-165.1 57.9-217.3C78.7 47.3 10.9 131.2 1.5 232zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3zm111.4-48C501.9 131.2 434.1 47.3 342 14.7c32.3 52.2 54.4 131.7 57.9 217.3z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

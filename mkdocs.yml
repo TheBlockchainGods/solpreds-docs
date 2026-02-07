@@ -30,6 +30,9 @@ nav:
       - WebSocket: developers/websocket.md
       - Code Examples: developers/examples.md
       - Official Links: developers/official-links.md
+  - Presale: presale.md
+  - Community Markets: community-markets.md
+  - Airdrop: airdrop.md
 
 markdown_extensions:
   - pymdownx.highlight:
