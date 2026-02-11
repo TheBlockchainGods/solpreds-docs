@@ -807,6 +807,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#place-bet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Place Bet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#claim-winnings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Claim Winnings
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -828,6 +850,28 @@
     <span class="md-ellipsis">
       
         Error Responses
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#february-2026-optimization-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        February 2026 Optimization Changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#need-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Need Help?
       
     </span>
   </a>
@@ -1197,6 +1241,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#place-bet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Place Bet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#claim-winnings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Claim Winnings
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1224,6 +1290,28 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#february-2026-optimization-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        February 2026 Optimization Changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#need-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Need Help?
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1243,6 +1331,7 @@
 
 <h1 id="solpreds-api-reference">SOLPREDS API Reference</h1>
 <p><strong>Base URL:</strong> <code>https://solpreds.fun/api/bot</code></p>
+<p><strong>Last Updated:</strong> February 2026 (Mainnet Optimization)</p>
 <hr />
 <h2 id="authentication-endpoints">Authentication Endpoints</h2>
 <h3 id="get-nonce">Get Nonce</h3>
@@ -1250,18 +1339,18 @@
 <p><strong>Auth:</strong> Not required</p>
 <p><strong>Parameters:</strong>
 - <code>wallet</code> (query, required): Solana wallet address</p>
-<p><strong>Response:</strong></p>
+<p><strong>Response:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;nonce&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;solpreds_1234567890_abc123&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SOLPREDS Bot Authentication\nWallet: ABC...\nNonce: solpreds_...\nTimestamp: 1234567890&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">&quot;expiresIn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
-</code></pre></div>
-<p><strong>Example:</strong></p>
+</code></pre></div></p>
+<p><strong>Example:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API</span><span class="si">}</span><span class="sb">/auth/nonce?wallet=</span><span class="si">${</span><span class="nx">wallet</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">nonce</span><span class="p">,</span><span class="w"> </span><span class="nx">message</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">// Sign the `message` with your wallet</span>
-</code></pre></div>
+</code></pre></div></p>
 <hr />
 <h3 id="verify-signature">Verify Signature</h3>
 <p><code>POST /auth/verify</code></p>
@@ -1270,15 +1359,15 @@
 - <code>wallet</code> (string): Wallet address
 - <code>nonce</code> (string): Nonce from <code>/auth/nonce</code>
 - <code>signature</code> (string): Base58-encoded signature</p>
-<p><strong>Response:</strong></p>
+<p><strong>Response:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bot_ABC123_1234567890_xyz&quot;</span><span class="p">,</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">&quot;wallet&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ABC...&quot;</span><span class="p">,</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">&quot;expiresAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-28T12:00:00.000Z&quot;</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">}</span>
-</code></pre></div>
-<p><strong>Example:</strong></p>
+</code></pre></div></p>
+<p><strong>Example:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">signature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nacl</span><span class="p">.</span><span class="nx">sign</span><span class="p">.</span><span class="nx">detached</span><span class="p">(</span><span class="nx">messageBytes</span><span class="p">,</span><span class="w"> </span><span class="nx">keypair</span><span class="p">.</span><span class="nx">secretKey</span><span class="p">);</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API</span><span class="si">}</span><span class="sb">/auth/verify`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
@@ -1286,23 +1375,23 @@
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="w"> </span><span class="nx">wallet</span><span class="p">,</span><span class="w"> </span><span class="nx">nonce</span><span class="p">,</span><span class="w"> </span><span class="nx">signature</span><span class="o">:</span><span class="w"> </span><span class="nx">bs58</span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">signature</span><span class="p">)</span><span class="w"> </span><span class="p">}),</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">});</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-</code></pre></div>
+</code></pre></div></p>
 <hr />
 <h3 id="check-auth-status">Check Auth Status</h3>
 <p><code>GET /auth/status</code></p>
 <p><strong>Auth:</strong> Required (Bearer token)</p>
-<p><strong>Response:</strong></p>
+<p><strong>Response:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;authenticated&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">&quot;wallet&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ABC...&quot;</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
-</code></pre></div>
+</code></pre></div></p>
 <hr />
 <h2 id="public-endpoints">Public Endpoints</h2>
 <h3 id="get-market-state">Get Market State</h3>
 <p><code>GET /market</code></p>
 <p><strong>Auth:</strong> Not required</p>
-<p><strong>Response:</strong></p>
+<p><strong>Response:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1234567890</span><span class="p">,</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">&quot;currentRoundId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3995</span><span class="p">,</span>
@@ -1331,7 +1420,7 @@
 <a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">  </span><span class="nt">&quot;phaseDuration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300000</span><span class="p">,</span>
 <a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="w">  </span><span class="nt">&quot;roundDuration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">600000</span>
 <a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="p">}</span>
-</code></pre></div>
+</code></pre></div></p>
 <hr />
 <h3 id="get-history">Get History</h3>
 <p><code>GET /history</code></p>
@@ -1339,7 +1428,7 @@
 <p><strong>Parameters:</strong>
 - <code>limit</code> (query, optional): 1-100, default 20
 - <code>offset</code> (query, optional): Pagination offset, default 0</p>
-<p><strong>Response:</strong></p>
+<p><strong>Response:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">&quot;rounds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="p">{</span>
@@ -1368,12 +1457,12 @@
 <a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="w">    </span><span class="nt">&quot;upWinRate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.52</span>
 <a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="p">}</span>
-</code></pre></div>
+</code></pre></div></p>
 <hr />
 <h3 id="get-rules">Get Rules</h3>
 <p><code>GET /rules</code></p>
 <p><strong>Auth:</strong> Not required</p>
-<p><strong>Response:</strong></p>
+<p><strong>Response:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&quot;phaseDurationSeconds&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">&quot;roundDurationSeconds&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">,</span>
@@ -1392,17 +1481,17 @@
 <a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">    </span><span class="nt">&quot;LIVE&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Betting locked, awaiting closeTime&quot;</span><span class="p">,</span>
 <a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">    </span><span class="nt">&quot;RESOLVED&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Winners determined&quot;</span>
 <a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">  </span><span class="p">},</span>
-<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">  </span><span class="nt">&quot;network&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;devnet&quot;</span><span class="p">,</span>
-<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">  </span><span class="nt">&quot;programId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2BiVb6opV9DbgJu9DWSRMkuA53skap7XgYo7EEBSNn21&quot;</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">  </span><span class="nt">&quot;network&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mainnet-beta&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">  </span><span class="nt">&quot;programId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;YOUR_MAINNET_PROGRAM_ID&quot;</span>
 <a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="p">}</span>
-</code></pre></div>
+</code></pre></div></p>
 <hr />
 <h3 id="get-positions-public">Get Positions (Public)</h3>
 <p><code>GET /positions/:wallet</code></p>
 <p><strong>Auth:</strong> Not required</p>
 <p><strong>Parameters:</strong>
 - <code>wallet</code> (path): Wallet address to query</p>
-<p><strong>Response:</strong></p>
+<p><strong>Response:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">&quot;wallet&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ABC...&quot;</span><span class="p">,</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">&quot;positions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -1431,24 +1520,24 @@
 <a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="w">    </span><span class="nt">&quot;totalVolume&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000</span>
 <a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="p">}</span>
-</code></pre></div>
+</code></pre></div></p>
 <hr />
 <h3 id="get-price">Get Price</h3>
 <p><code>GET /price</code></p>
 <p><strong>Auth:</strong> Not required</p>
-<p><strong>Response:</strong></p>
+<p><strong>Response:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">250.50</span><span class="p">,</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.15</span><span class="p">,</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1234567890</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">}</span>
-</code></pre></div>
+</code></pre></div></p>
 <hr />
 <h2 id="authenticated-endpoints">Authenticated Endpoints</h2>
 <h3 id="get-my-positions">Get My Positions</h3>
 <p><code>GET /auth/positions</code></p>
 <p><strong>Auth:</strong> Required (Bearer token)</p>
-<p><strong>Response:</strong></p>
+<p><strong>Response:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">{</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">&quot;wallet&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ABC...&quot;</span><span class="p">,</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nt">&quot;positions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -1476,7 +1565,7 @@
 <a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="w">    </span><span class="nt">&quot;openPositionCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
 <a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a><span class="p">}</span>
-</code></pre></div>
+</code></pre></div></p>
 <hr />
 <h3 id="prepare-bet">Prepare Bet</h3>
 <p><code>POST /auth/prepare-bet</code></p>
@@ -1485,7 +1574,7 @@
 - <code>roundId</code> (number): Round to bet on
 - <code>side</code> (string): "Up" or "Down"
 - <code>amount</code> (number): Amount in lamports (min 10,000,000)</p>
-<p><strong>Response:</strong></p>
+<p><strong>Response:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">{</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="nt">&quot;roundId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3995</span><span class="p">,</span>
@@ -1496,16 +1585,16 @@
 <a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">  </span><span class="nt">&quot;timeRemaining&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">180000</span><span class="p">,</span>
 <a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">  </span><span class="nt">&quot;serverTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1234567710</span><span class="p">,</span>
 <a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">  </span><span class="nt">&quot;accounts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">    </span><span class="nt">&quot;programId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2BiVb6opV9DbgJu9DWSRMkuA53skap7XgYo7EEBSNn21&quot;</span><span class="p">,</span>
-<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">    </span><span class="nt">&quot;globalState&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[PDA placeholder - derive with seeds=[&#39;global&#39;]]&quot;</span><span class="p">,</span>
-<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">    </span><span class="nt">&quot;roundState&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[PDA placeholder - derive with seeds=[&#39;round&#39;, roundId]]&quot;</span><span class="p">,</span>
-<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">    </span><span class="nt">&quot;vault&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[PDA placeholder - derive with seeds=[&#39;vault&#39;, roundState, &#39;up&#39; or &#39;down&#39;]]&quot;</span><span class="p">,</span>
-<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">    </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[PDA placeholder - derive with seeds=[&#39;position&#39;, roundState, userWallet]]&quot;</span><span class="p">,</span>
-<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">    </span><span class="nt">&quot;feeVault&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[PDA placeholder - derive with seeds=[&#39;fee_vault&#39;]]&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">    </span><span class="nt">&quot;programId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;YOUR_MAINNET_PROGRAM_ID&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">    </span><span class="nt">&quot;globalState&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[PDA - derive with seeds=[&#39;global&#39;]]&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">    </span><span class="nt">&quot;roundState&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[PDA - derive with seeds=[&#39;round&#39;, roundId]]&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">    </span><span class="nt">&quot;vault&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[PDA - derive with seeds=[&#39;vault&#39;, roundState, &#39;up&#39; or &#39;down&#39;]]&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">    </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[PDA - derive with seeds=[&#39;position&#39;, roundState, userWallet]]&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">    </span><span class="nt">&quot;feeVault&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[PDA - derive with seeds=[&#39;fee_vault&#39;]]&quot;</span><span class="p">,</span>
 <a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="w">    </span><span class="nt">&quot;userWallet&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;YOUR_WALLET_ADDRESS&quot;</span>
 <a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="w">  </span><span class="p">},</span>
 <a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="w">  </span><span class="nt">&quot;instructions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="w">    </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;place_bet&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="w">    </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;place_bet_or_create&quot;</span><span class="p">,</span>
 <a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="w">    </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="w">      </span><span class="nt">&quot;side&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;up&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">},</span>
 <a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="w">      </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;100000000&quot;</span>
@@ -1517,10 +1606,97 @@
 <a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a><span class="w">    </span><span class="nt">&quot;estimatedTxFee&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5000</span>
 <a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a><span class="p">}</span>
-</code></pre></div>
+</code></pre></div></p>
+<div class="admonition info">
+<p class="admonition-title">Optimization Note</p>
+<p>As of February 2026, the program uses <code>place_bet_or_create</code> for all bets. This instruction automatically creates rounds if they don't exist, eliminating the need for separate round creation logic.</p>
+</div>
 <p><strong>Errors:</strong>
 - <code>400</code>: Missing fields, invalid side, amount too low
 - <code>400</code>: Round locked for betting</p>
+<hr />
+<h3 id="place-bet">Place Bet</h3>
+<p><code>POST /auth/bet</code></p>
+<p><strong>Auth:</strong> Required (Bearer token)</p>
+<p><strong>Body:</strong>
+- <code>side</code> (string): "Up" or "Down"
+- <code>amount</code> (number): Amount in lamports (min 10,000,000)</p>
+<p><strong>Response:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">&quot;txHash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5X7g...&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="nt">&quot;roundId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3995</span><span class="p">,</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="nt">&quot;side&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Up&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">  </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100000000</span><span class="p">,</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">  </span><span class="nt">&quot;amountSol&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-02-10T12:00:00.000Z&quot;</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="p">}</span>
+</code></pre></div></p>
+<div class="admonition success">
+<p class="admonition-title">Automatic Round Creation</p>
+<p>Rounds are created automatically if they don't exist. You don't need to check round status before betting.</p>
+</div>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API</span><span class="si">}</span><span class="sb">/auth/bet`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="nx">side</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Up&#39;</span><span class="p">,</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">    </span><span class="nx">amount</span><span class="o">:</span><span class="w"> </span><span class="mf">100</span><span class="nx">_000_000</span><span class="w"> </span><span class="c1">// 0.1 SOL</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">  </span><span class="p">})</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="p">});</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">txHash</span><span class="p">,</span><span class="w"> </span><span class="nx">roundId</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Bet placed! TX: </span><span class="si">${</span><span class="nx">txHash</span><span class="si">}</span><span class="sb">, Round: </span><span class="si">${</span><span class="nx">roundId</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</code></pre></div></p>
+<p><strong>Errors:</strong>
+- <code>400</code>: Invalid side or amount
+- <code>401</code>: Invalid or expired token
+- <code>400</code>: Round locked (betting window closed)
+- <code>500</code>: Transaction failed</p>
+<hr />
+<h3 id="claim-winnings">Claim Winnings</h3>
+<p><code>POST /auth/claim</code></p>
+<p><strong>Auth:</strong> Required (Bearer token)</p>
+<p><strong>Body:</strong>
+- <code>roundId</code> (number): Round to claim from</p>
+<p><strong>Response:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span><span class="nt">&quot;txHash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9Kp2...&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span><span class="nt">&quot;roundId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3993</span><span class="p">,</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">  </span><span class="nt">&quot;payout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">186200000</span><span class="p">,</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">  </span><span class="nt">&quot;payoutSol&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1862</span><span class="p">,</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">  </span><span class="nt">&quot;rentRefund&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1130000</span><span class="p">,</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">  </span><span class="nt">&quot;rentRefundSol&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00113</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="p">}</span>
+</code></pre></div></p>
+<div class="admonition success">
+<p class="admonition-title">Rent Refund</p>
+<p>As of February 2026, claiming automatically closes your Position account and refunds ~0.00113 SOL rent back to your wallet. This happens automatically—no extra steps needed.</p>
+</div>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API</span><span class="si">}</span><span class="sb">/auth/claim`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">    </span><span class="nx">roundId</span><span class="o">:</span><span class="w"> </span><span class="mf">3993</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="w">  </span><span class="p">})</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="p">});</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">payout</span><span class="p">,</span><span class="w"> </span><span class="nx">rentRefund</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Claimed </span><span class="si">${</span><span class="nx">payout</span><span class="si">}</span><span class="sb"> lamports + </span><span class="si">${</span><span class="nx">rentRefund</span><span class="si">}</span><span class="sb"> rent refund`</span><span class="p">);</span>
+</code></pre></div></p>
+<p><strong>Errors:</strong>
+- <code>400</code>: Round not resolved yet
+- <code>400</code>: Position not found or already claimed
+- <code>400</code>: You didn't win this round</p>
 <hr />
 <h2 id="rate-limits">Rate Limits</h2>
 <table>
@@ -1553,12 +1729,12 @@
 - <code>X-RateLimit-Limit</code>: Max requests
 - <code>X-RateLimit-Remaining</code>: Remaining requests
 - <code>X-RateLimit-Reset</code>: Seconds until reset</p>
-<p><strong>429 Response:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rate limit exceeded&quot;</span><span class="p">,</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">&quot;retryAfter&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="p">}</span>
-</code></pre></div>
+<p><strong>429 Response:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">{</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rate limit exceeded&quot;</span><span class="p">,</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span><span class="nt">&quot;retryAfter&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="p">}</span>
+</code></pre></div></p>
 <hr />
 <h2 id="error-responses">Error Responses</h2>
 <table>
@@ -1587,11 +1763,36 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Error format:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">{</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Description of what went wrong&quot;</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="p">}</span>
-</code></pre></div>
+<p><strong>Error format:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">{</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Description of what went wrong&quot;</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<h2 id="february-2026-optimization-changes">February 2026 Optimization Changes</h2>
+<p>The SOLPREDS program was optimized for mainnet deployment with the following improvements:</p>
+<p><strong>Cost Reductions:</strong>
+- Position accounts now auto-close after claiming, refunding ~0.00113 SOL rent to users
+- Compute units reduced by ~10,000 per transaction (~50% savings)
+- Program binary size reduced by ~5-10KB</p>
+<p><strong>API Changes:</strong>
+- ~~<code>place_bet</code> instruction~~ (removed - deprecated)
+- ✅ <code>place_bet_or_create</code> used for all betting operations
+- ✅ Automatic round creation (no need to check if round exists)
+- ✅ Automatic Position account cleanup on claim (rent refunded)</p>
+<p><strong>Migration Required:</strong> None. All existing bots and integrations continue to work without changes. The backend automatically uses the optimized instruction.</p>
+<p><strong>Impact:</strong>
+- ~50% reduction in effective per-bet costs for users
+- Estimated savings: ~135 SOL/year at scale
+- Zero breaking changes for API consumers</p>
+<hr />
+<h2 id="need-help">Need Help?</h2>
+<ul>
+<li><strong>Documentation:</strong> <a href="https://docs.solpreds.fun">docs.solpreds.fun</a></li>
+<li><strong>Telegram:</strong> <a href="https://t.me/SOLPREDS">t.me/SOLPREDS</a></li>
+<li><strong>Twitter:</strong> <a href="https://x.com/SOLPREDS_FUN">@SOLPREDS_FUN</a></li>
+<li><strong>Support:</strong> Contact via Telegram for bot API issues</li>
+</ul>
 
 
 
