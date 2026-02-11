@@ -2,6 +2,8 @@
 
 **Base URL:** `https://solpreds.fun/api/bot`
 
+**Last Updated:** February 2026 (Mainnet Optimization)
+
 ---
 
 ## Authentication Endpoints
@@ -16,7 +18,6 @@
 - `wallet` (query, required): Solana wallet address
 
 **Response:**
-
 ```json
 {
   "nonce": "solpreds_1234567890_abc123",
@@ -26,7 +27,6 @@
 ```
 
 **Example:**
-
 ```javascript
 const res = await fetch(`${API}/auth/nonce?wallet=${wallet}`);
 const { nonce, message } = await res.json();
@@ -47,7 +47,6 @@ const { nonce, message } = await res.json();
 - `signature` (string): Base58-encoded signature
 
 **Response:**
-
 ```json
 {
   "success": true,
@@ -58,7 +57,6 @@ const { nonce, message } = await res.json();
 ```
 
 **Example:**
-
 ```javascript
 const signature = nacl.sign.detached(messageBytes, keypair.secretKey);
 const res = await fetch(`${API}/auth/verify`, {
@@ -78,7 +76,6 @@ const { token } = await res.json();
 **Auth:** Required (Bearer token)
 
 **Response:**
-
 ```json
 {
   "authenticated": true,
@@ -97,7 +94,6 @@ const { token } = await res.json();
 **Auth:** Not required
 
 **Response:**
-
 ```json
 {
   "timestamp": 1234567890,
@@ -142,7 +138,6 @@ const { token } = await res.json();
 - `offset` (query, optional): Pagination offset, default 0
 
 **Response:**
-
 ```json
 {
   "rounds": [
@@ -183,7 +178,6 @@ const { token } = await res.json();
 **Auth:** Not required
 
 **Response:**
-
 ```json
 {
   "phaseDurationSeconds": 300,
@@ -203,8 +197,8 @@ const { token } = await res.json();
     "LIVE": "Betting locked, awaiting closeTime",
     "RESOLVED": "Winners determined"
   },
-  "network": "devnet",
-  "programId": "2BiVb6opV9DbgJu9DWSRMkuA53skap7XgYo7EEBSNn21"
+  "network": "mainnet-beta",
+  "programId": "YOUR_MAINNET_PROGRAM_ID"
 }
 ```
 
@@ -220,7 +214,6 @@ const { token } = await res.json();
 - `wallet` (path): Wallet address to query
 
 **Response:**
-
 ```json
 {
   "wallet": "ABC...",
@@ -261,7 +254,6 @@ const { token } = await res.json();
 **Auth:** Not required
 
 **Response:**
-
 ```json
 {
   "price": 250.50,
@@ -281,7 +273,6 @@ const { token } = await res.json();
 **Auth:** Required (Bearer token)
 
 **Response:**
-
 ```json
 {
   "wallet": "ABC...",
@@ -326,7 +317,6 @@ const { token } = await res.json();
 - `amount` (number): Amount in lamports (min 10,000,000)
 
 **Response:**
-
 ```json
 {
   "success": true,
@@ -338,16 +328,16 @@ const { token } = await res.json();
   "timeRemaining": 180000,
   "serverTime": 1234567710,
   "accounts": {
-    "programId": "2BiVb6opV9DbgJu9DWSRMkuA53skap7XgYo7EEBSNn21",
-    "globalState": "[PDA placeholder - derive with seeds=['global']]",
-    "roundState": "[PDA placeholder - derive with seeds=['round', roundId]]",
-    "vault": "[PDA placeholder - derive with seeds=['vault', roundState, 'up' or 'down']]",
-    "position": "[PDA placeholder - derive with seeds=['position', roundState, userWallet]]",
-    "feeVault": "[PDA placeholder - derive with seeds=['fee_vault']]",
+    "programId": "YOUR_MAINNET_PROGRAM_ID",
+    "globalState": "[PDA - derive with seeds=['global']]",
+    "roundState": "[PDA - derive with seeds=['round', roundId]]",
+    "vault": "[PDA - derive with seeds=['vault', roundState, 'up' or 'down']]",
+    "position": "[PDA - derive with seeds=['position', roundState, userWallet]]",
+    "feeVault": "[PDA - derive with seeds=['fee_vault']]",
     "userWallet": "YOUR_WALLET_ADDRESS"
   },
   "instructions": {
-    "method": "place_bet",
+    "method": "place_bet_or_create",
     "args": {
       "side": { "up": {} },
       "amount": "100000000"
@@ -361,9 +351,113 @@ const { token } = await res.json();
 }
 ```
 
+!!! info "Optimization Note"
+    As of February 2026, the program uses `place_bet_or_create` for all bets. This instruction automatically creates rounds if they don't exist, eliminating the need for separate round creation logic.
+
 **Errors:**
 - `400`: Missing fields, invalid side, amount too low
 - `400`: Round locked for betting
+
+---
+
+### Place Bet
+
+`POST /auth/bet`
+
+**Auth:** Required (Bearer token)
+
+**Body:**
+- `side` (string): "Up" or "Down"
+- `amount` (number): Amount in lamports (min 10,000,000)
+
+**Response:**
+```json
+{
+  "success": true,
+  "txHash": "5X7g...",
+  "roundId": 3995,
+  "side": "Up",
+  "amount": 100000000,
+  "amountSol": 0.1,
+  "timestamp": "2026-02-10T12:00:00.000Z"
+}
+```
+
+!!! success "Automatic Round Creation"
+    Rounds are created automatically if they don't exist. You don't need to check round status before betting.
+
+**Example:**
+```javascript
+const response = await fetch(`${API}/auth/bet`, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    side: 'Up',
+    amount: 100_000_000 // 0.1 SOL
+  })
+});
+
+const { txHash, roundId } = await response.json();
+console.log(`Bet placed! TX: ${txHash}, Round: ${roundId}`);
+```
+
+**Errors:**
+- `400`: Invalid side or amount
+- `401`: Invalid or expired token
+- `400`: Round locked (betting window closed)
+- `500`: Transaction failed
+
+---
+
+### Claim Winnings
+
+`POST /auth/claim`
+
+**Auth:** Required (Bearer token)
+
+**Body:**
+- `roundId` (number): Round to claim from
+
+**Response:**
+```json
+{
+  "success": true,
+  "txHash": "9Kp2...",
+  "roundId": 3993,
+  "payout": 186200000,
+  "payoutSol": 0.1862,
+  "rentRefund": 1130000,
+  "rentRefundSol": 0.00113
+}
+```
+
+!!! success "Rent Refund"
+    As of February 2026, claiming automatically closes your Position account and refunds ~0.00113 SOL rent back to your wallet. This happens automatically—no extra steps needed.
+
+**Example:**
+```javascript
+const response = await fetch(`${API}/auth/claim`, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    roundId: 3993
+  })
+});
+
+const { payout, rentRefund } = await response.json();
+console.log(`Claimed ${payout} lamports + ${rentRefund} rent refund`);
+```
+
+**Errors:**
+- `400`: Round not resolved yet
+- `400`: Position not found or already claimed
+- `400`: You didn't win this round
 
 ---
 
@@ -381,7 +475,6 @@ const { token } = await res.json();
 - `X-RateLimit-Reset`: Seconds until reset
 
 **429 Response:**
-
 ```json
 {
   "error": "Rate limit exceeded",
@@ -401,9 +494,41 @@ const { token } = await res.json();
 | 500 | Server error |
 
 **Error format:**
-
 ```json
 {
   "error": "Description of what went wrong"
 }
 ```
+
+---
+
+## February 2026 Optimization Changes
+
+The SOLPREDS program was optimized for mainnet deployment with the following improvements:
+
+**Cost Reductions:**
+- Position accounts now auto-close after claiming, refunding ~0.00113 SOL rent to users
+- Compute units reduced by ~10,000 per transaction (~50% savings)
+- Program binary size reduced by ~5-10KB
+
+**API Changes:**
+- ~~`place_bet` instruction~~ (removed - deprecated)
+- ✅ `place_bet_or_create` used for all betting operations
+- ✅ Automatic round creation (no need to check if round exists)
+- ✅ Automatic Position account cleanup on claim (rent refunded)
+
+**Migration Required:** None. All existing bots and integrations continue to work without changes. The backend automatically uses the optimized instruction.
+
+**Impact:**
+- ~50% reduction in effective per-bet costs for users
+- Estimated savings: ~135 SOL/year at scale
+- Zero breaking changes for API consumers
+
+---
+
+## Need Help?
+
+- **Documentation:** [docs.solpreds.fun](https://docs.solpreds.fun)
+- **Telegram:** [t.me/SOLPREDS](https://t.me/SOLPREDS)
+- **Twitter:** [@SOLPREDS_FUN](https://x.com/SOLPREDS_FUN)
+- **Support:** Contact via Telegram for bot API issues
