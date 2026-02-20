@@ -1,233 +1,322 @@
 # Community Prediction Markets
 
-**Create markets. Trade outcomes. Earn from volume.**
+**Create any market. Trade outcomes. Validate results.**
 
-!!!  "Status: BETA"
-    Community Markets is currently in testing phase. Coming soon to mainnet!
-
----
-
-## The Innovation
-
-SOLPREDS Community Markets combines the best of **Pump.fun** and **Polymarket** to solve the memecoin problem.
-
-### Comparison Table
-
-| Feature | Pump.fun | Polymarket | Kalshi | **SOLPREDS Markets** |
-|---------|----------|------------|--------|---------------------|
-| **Asset Type** | Memecoins | Predictions | Predictions | Predictions |
-| **Price Driver** | Hype/Narrative | Real Events | Real Events | ✅ Real Events |
-| **Creator Earnings** | >0.8% of volume | None | None | ✅ 1% volume |
-| **Bonding Curve** | ✅ Yes | ❌ Order Book | ❌ Order Book | ✅ Yes |
-| **Permissionless** | ✅ Yes | ❌ Curated | ❌ Regulated | ✅ Yes |
-| **Dev Risk** | High (rugpulls) | N/A | N/A | ✅ Low |
+!!! success "Status: LIVE BETA"
+    Community Markets is live with virtual tokens for testing! Real $SOLPREDS integration coming after presale.
 
 ---
 
-## The Memecoin Problem - SOLVED
+## What Makes Us Different
 
-### Traditional Memecoins (Pump.fun)
+SOLPREDS Community Markets is the first **fully decentralized prediction market** on Solana with permissionless market creation and game-theory-based resolution.
 
-❌ Price depends on team/narrative/hype  
-❌ Developers blamed for price crashes  
-❌ Community anger when tokens dump  
-❌ No sustainable value for creators  
-❌ High risk of rugpulls  
+### Comparison
 
-### SOLPREDS Community Markets
-
-✅ Outcome depends on **REAL WORLD EVENTS**  
-✅ Creators earn from **volume, not price**  
-✅ No blowback - market resolves based on **facts**  
-✅ Sustainable creator revenue (1% trades + 2% winnings)  
-✅ Price reflects **probability, not hype**  
-
-!!! example "Example Comparison"
-    **Pump.fun:** "price faces infinite volatility, many tokens inevitably pump & dump"  
-    → Price based on belief in team/community
-    
-    **SOLPREDS:** "Will BTC hit $100K by March?"  
-    → Outcome is objective, verifiable, real
+| Feature | Polymarket | Kalshi | **SOLPREDS Markets** |
+|---------|------------|--------|---------------------|
+| **Market Creation** | ❌ Curated | ❌ Regulated | ✅ Permissionless |
+| **Resolution** | Centralized UMA | Centralized CFTC | ✅ Decentralized Staking |
+| **Creator Earnings** | None | None | ✅ 1% volume + 2% payouts |
+| **Trading Model** | Order Book | Order Book | ✅ Bonding Curve AMM |
+| **Barriers** | High liquidity needed | US citizens only | ✅ Open to all |
+| **Market Types** | Binary only | Binary only | ✅ Binary + Multi-Choice (10 outcomes) |
 
 ---
 
 ## How It Works
 
-### 1. Market Creation (Permissionless)
+### 1. Create Any Market (0.1 Virtual SOL)
 
-Anyone can create a YES/NO prediction market:
+Anyone can create prediction markets:
 
-- **Cost:** 0.1 SOL
-- **Creator earns:** 1% of all trading volume + 2% of winner payouts
-- **No liquidity needed:** Bonding curve handles everything
+**Binary Markets (YES/NO):**
+- "Will BTC hit $100K by March?"
+- "Will SOL flip ETH in TVL?"
+- "Will Trump win 2028?"
+
+**Multi-Choice Markets (up to 10 outcomes):**
+- "Who wins the 2026 World Cup?" → Brazil, Argentina, France, Germany...
+- "What will SOL price be Dec 31?" → <$100, $100-$200, $200-$500, >$500
+- "Which AI company IPOs first?" → OpenAI, Anthropic, xAI, Mistral
+
+**Creator Benefits:**
+- Earn **1% of all trading volume**
+- Earn **2% of final payouts**
+- No liquidity needed - bonding curve handles it
+- Claimable earnings dashboard
+- Passive income from market activity
+
+**Cost:** 0.1 SOL (virtual SOL during beta)
+
+---
+
+### 2. Dynamic Bonding Curve AMM
+
+Markets use a **dynamic virtual base AMM** for instant execution:
+
+**Price Formula:**
 ```
-Example: "Will Elon buy Microsoft by 2026?"
-Creator spends: 0.1 SOL
-Market attracts: 1,000 SOL in trading volume
-Creator earns: 10 SOL (1% of volume) + 2% of final payouts
+price_i = (b + shares_i) / (N × b + total_shares)
+```
+
+Where:
+- `b` = dynamic virtual base (adjusts with volume)
+- `N` = number of outcomes (2 for binary, up to 10 for multi-choice)
+- `shares_i` = shares held for outcome i
+- `total_shares` = sum of all outcome shares
+
+**Key Features:**
+- No order books needed
+- Instant trades at fair prices
+- Price impact decreases as volume grows
+- All outcome prices always sum to 100%
+- Natural price discovery
+
+**How it works:**
+```
+Binary Market: "Will SOL hit $200 by March?"
+
+Initial:        YES: 50.0%  |  NO: 50.0%
+
+Alice buys $100 YES
+→               YES: 59.2%  |  NO: 40.8%
+
+Bob buys $50 NO
+→               YES: 53.1%  |  NO: 46.9%
+
+Prices reflect real-time probability!
+```
+
+**Multi-Choice Example:**
+```
+Market: "Who wins MVP 2026?"
+
+Initial:        Player A: 25% | Player B: 25% | Player C: 25% | Player D: 25%
+
+After trading:  Player A: 42% | Player B: 28% | Player C: 18% | Player D: 12%
 ```
 
 ---
 
-### 2. Bonding Curve Trading
+### 3. Decentralized Resolution
 
-Markets use a **constant product AMM** (like Uniswap):
+Markets resolve through a **3-phase staking system** with real economic stakes:
 
-$$k = yes_{liquidity} \times no_{liquidity} = 1,000,000$$
+#### Phase 1: Proposal
+- Market ends (auto at deadline)
+- Validators stake **10,000 $SOLPREDS** (~$200 USD) to propose outcome
+- **6-hour dispute window** begins
+- If undisputed → Validator earns **1% of market pot**
 
-**How prices work:**
+#### Phase 2: Challenge Window (6 hours)
 
-- Initial state: YES = 50%, NO = 50%
-- Someone buys YES → YES price increases, NO decreases
-- Always: YES% + NO% = 100%
-
-!!! info "Live Price Discovery"
-    Prices automatically adjust based on real demand. No order books, no matching - instant execution!
-
-**Visual Example:**
-```
-Market: "Will BTC hit $100K by March 1?"
-
-Initial:  YES: 50%  |  NO: 50%
-
-Alice buys 100 SOL of YES
-→ YES: 59%  |  NO: 41%
-
-Bob buys 50 SOL of NO
-→ YES: 53%  |  NO: 47%
-
-Market reflects real-time probability!
-```
-
----
-
-### 3. Resolution System
-
-Markets resolve through **decentralized voting**:
-
-### 3. Resolution System
-
-Markets resolve through a **multi-phase process** with dispute protection:
-
-#### Phase 1: Proposal (6 hours)
-- Anyone stakes $200 in $SOLPREDS tokens and proposes outcome (YES or NO)
-- 6-hour dispute window begins
-- If correct and no dispute, proposer earns 0.5% of pot
-
-#### Phase 2: Dispute Window (6 hours)
-**Two possible paths:**
-
-**Path A - No Dispute (Most Common):**
-- No one challenges the proposal
-- After 6 hours, market automatically finalizes with proposed outcome
+**Path A - No Dispute (90% of cases):**
+- No one challenges within 6 hours
+- Market auto-finalizes with proposed outcome
 - Winners can claim payouts
-- Proposer gets stake back + 0.5% reward from winning amount
+- Validator gets: stake back + 1% pot reward
 
 **Path B - Disputed:**
-- Someone disagrees and matches the $200 stake
-- Proposes opposite outcome (e.g., if original said YES, dispute says NO)
-- Triggers community voting period from SOLPREDS holders
+- Someone disagrees and stakes 10,000 $SOLPREDS
+- Proposes different outcome
+- Triggers community vote
 
-#### Phase 3: Community Vote (24 hours)
-**Only happens if disputed:**
-- All $SOLPREDS token holders can vote
-- Votes weighted by token balance (1 token = 1 vote)
-- 5% quorum required (5% of total supply must vote)
-- Winning side determined by majority
+#### Phase 3: Community Vote (24 hours - If Disputed)
+- All $SOLPREDS holders vote
+- Voting power = token balance (1 token = 1 vote)
+- **Minimum 3 unique voters** required (quorum)
+- Majority wins
 
-**Vote Resolution:**
-- Winning voters share 25% of losing staker's $200 stake
-- Winning staker gets their $200 back + 50% of loser's stake ($100)
-- 25% of loser's stake burned
+**Slashing Distribution (Loser's Stake):**
+- **25%** → Winning staker bonus
+- **50%** → Split among winning voters (by voting power)
+- **25%** → Burned permanently
 
-#### Phase 4: Settlement
-- Market resolves based on proposal (if undisputed) or vote result (if disputed)
-- Winners claim payouts (minus 5% fee)
-- Losers get $0
-- Fees split: Creator (2%) + Platform (2.5%) + validator (0.5%)
+**This ensures:**
+- ✅ Validators only propose correct outcomes (lose $200 if wrong)
+- ✅ Challengers only dispute when confident (lose $200 if wrong)
+- ✅ Community votes accurately (earn from being right)
+- ✅ No centralized oracle needed
 
 ---
 
-**Example Flow:**
+## Virtual Economy (Beta)
 
-**Scenario 1 - Undisputed (90% of cases):**
+During beta testing, Community Markets operates with virtual assets:
+
+**Every new user receives:**
+- **1,000 Virtual SOL** for trading
+- **1,000,000 Virtual $SOLPREDS** for validation/voting
+
+**Benefits:**
+- Zero risk testing
+- Build reputation and strategies
+- Creator earnings accumulate (claimable)
+- Learn the system before mainnet
+
+**Mainnet Transition:**
+- Real $SOLPREDS token integration
+- Real SOL trading
+- Creator earnings become real
+- Referral rewards become real
+
 ---
 
 ## Fee Structure
 
-### Trading Fees (3% total)
-- **1%** → Market creator
-- **2%** → Platform
+### Trading Fees (3% per trade)
+| Recipient | Share |
+|-----------|-------|
+| Market Creator | 1% |
+| Platform | 2% |
 
-### Winning Fees (5% total)
-- **2%** → Market creator
-- **2.5%** → Platform
-- **0.5%** → Validator
+### Claiming Winnings (5% of payout)
+| Recipient | Share |
+|-----------|-------|
+| Market Creator | 2% |
+| Platform | 3% |
 
-!!! success "Creator Benefits"
-    Creators earn passively from every trade AND from final settlements. The more popular your market, the more you earn! Validaors earn from solving markets.
+**Total if you win:** ~8% (3% trade + 5% claim)
+
+!!! tip "Creator Earnings"
+    Popular markets generate passive income! A market with $10,000 volume earns creator $100 (1%) + 2% of final payouts. All earnings are claimable anytime.
 
 ---
 
-## Why This Matters
+## 5-Level Referral System
 
-### For Creators
+Unified across Prediction Rounds and Community Markets:
 
-✅ **Sustainable income** from volume  
-✅ **No price risk** - earn regardless of outcome  
-✅ **No community blowback** - not your fault if wrong side wins  
-✅ **Permissionless** - create any market instantly  
+| Level | Commission |
+|-------|-----------|
+| **Level 1** (Direct) | 25% |
+| **Level 2** | 3.5% |
+| **Level 3** | 2.5% |
+| **Level 4** | 2% |
+| **Level 5** | 1% |
 
-### For Traders
+**How it works:**
+- One referral code for both platforms
+- Earn from all your referrals' trading fees
+- Commissions split from platform share (no extra fees to users)
+- During beta: Auto-credits to virtual balance
+- On mainnet: Claimable on-chain earnings
 
-✅ **Fair prices** - bonding curve, not market makers  
-✅ **Instant execution** - no waiting for orders  
-✅ **Real outcomes** - not dependent on dev actions  
-✅ **Transparent resolution** - community-driven  
+**Example:**
+```
+You refer Alice (Level 1)
+Alice refers Bob (Level 2)
+Bob refers Carol (Level 3)
 
-### For the Ecosystem
+Bob trades $1,000 → generates $30 in fees
 
-✅ **Solves rugpull problem** - no dev control over outcomes  
-✅ **Aligns incentives** - creators want high volume, not price manipulation  
-✅ **Brings legitimacy** - outcomes based on real events  
-✅ **Scalable** - anyone can create markets on anything  
+Your earnings:
+- From Alice's trades: 25% of fees
+- From Bob's trades: 3.5% of fees
+- From Carol's trades: 2.5% of fees
+```
+
+---
+
+## Why This Innovation Matters
+
+### No More Centralized Oracles
+
+**Traditional platforms:**
+- Polymarket → UMA resolvers (centralized committee)
+- Kalshi → CFTC regulated (US only, curated markets)
+- Augur → Failed (oracle problem unsolved)
+
+**SOLPREDS solves this:**
+- ✅ Permissionless validation
+- ✅ Economic penalties for lying ($200 stake loss)
+- ✅ Community voting as backup
+- ✅ No single point of failure
+
+---
+
+### Permissionless Market Creation
+
+**Traditional platforms:**
+- Weeks-long review process
+- High curation barriers
+- Limited market types
+
+**SOLPREDS:**
+- ✅ Create any market in 30 seconds
+- ✅ 0.1 SOL cost
+- ✅ Instant approval
+- ✅ Binary + Multi-Choice support
+- ✅ Earn from your ideas
+
+---
+
+### Multi-Choice Markets
+
+**Unique to SOLPREDS:**
+- Up to 10 custom outcomes per market
+- More nuanced predictions
+- Higher engagement
+- More trading opportunities
+
+**Examples:**
+- "Which team wins?" → 10 teams
+- "Price range prediction?" → 10 ranges
+- "Who's next president?" → Multiple candidates
 
 ---
 
 ## Example Markets
 
-!!! example "Popular Market Ideas"
-    - "Will BTC hit $100K in Q1 2026?"
-    - "Will Trump announce presidential run by March?"
-    - "Will Nvidia reach $1T market cap this year?"
-    - "Will SOL flip ETH in TVL by 2026?"
-    - "Will GPT-5 launch in 2026?"
+Browse live markets at **[markets.solpreds.fun](https://markets.solpreds.fun)**
+
+!!! example "Active Markets"
+    **Binary:**
+    - "Will $SOLPREDS presale hit $1M?"
+    - "Will BTC hit $100K by March?"
+    - "Will SOL flip ETH in DeFi TVL?"
+    
+    **Multi-Choice:**
+    - "Who wins the 2026 World Cup?" (10 countries)
+    - "SOL price Dec 31?" (10 price ranges)
+    - "Which AI company IPOs first?" (5 companies)
 
 ---
 
-## Launch Status
+## Roadmap
 
 | Milestone | Status |
 |-----------|--------|
-| Smart Contract Development | 🟡 In Progress |
-| Bonding Curve Testing | ✅ Complete |
-| Resolution System | ✅ Complete |
-| UI/UX Design | 🟡 In Progress |
-| Security Audit | ⏳ Pending |
-| Mainnet Launch | ⏳ Q2 2026 |
+| ✅ Dynamic Bonding Curve AMM | Complete |
+| ✅ Multi-Choice Markets | Complete |
+| ✅ Resolution System | Complete |
+| ✅ Creator Earnings Dashboard | Complete |
+| ✅ 5-Level Referrals | Complete |
+| ✅ Virtual Economy Beta | **Live Now** |
+| 🟡 $SOLPREDS Presale | Coming Soon |
+| ⏳ Token Integration | After Presale |
+| ⏳ Mainnet Launch | Q2 2026 |
+| ⏳ On-Chain Program | Q3 2026 |
 
 ---
 
-## Get Involved
+## Get Started
 
-!!! info "Join the Beta"
-    Want to test Community Markets before launch?
-    
-    - Join our [Telegram](https://t.me/SOLPREDS)
-    - Follow updates on [X](https://x.com/SOLPREDS_FUN)
-    - Check [dev environment](https://markets.solpreds.fun/dev)
+**Test Community Markets with virtual tokens:**
+
+👉 **[markets.solpreds.fun](https://markets.solpreds.fun)**
+
+**Join the $SOLPREDS presale:**
+
+👉 **[presale.solpreds.fun](https://presale.solpreds.fun)**
+
+**Stay Connected:**
+- 🐦 [Twitter/X](https://x.com/SOLPREDS_FUN)
+- 💬 [Telegram](https://t.me/SOLPREDS)
 
 ---
 
 [Back to Home](index.md){ .md-button }
-[View Main Platform](https://solpreds.fun){ .md-button .md-button--primary }
+[View Prediction Rounds](https://solpreds.fun){ .md-button .md-button--primary }
+[Join Presale](https://presale.solpreds.fun){ .md-button .md-button--primary }
