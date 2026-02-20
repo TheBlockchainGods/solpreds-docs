@@ -3,7 +3,7 @@
 Multi-Chain USDC Contributions • Solana • BNB Chain • Base
 
 !!! warning "Important"
-    Must enter a valid Solana address before contributing on BNB Chain or Base to receive $SOLPREDS tokens at TGE.
+    Must enter a valid Solana address before contributing on BNB Chain or Base to receive $SOLPREDS tokens at TGE. TGE = 1 WEEK AFTER PRESALE END
 
 [Contribute Now →](https://presale.solpreds.fun){ .md-button .md-button--primary }
 
@@ -14,6 +14,7 @@ Multi-Chain USDC Contributions • Solana • BNB Chain • Base
 | Detail | Value |
 |--------|-------|
 | **Token Name** | SOLPREDS |
+| **PRESALE START** | FEBRUARY 19TH|
 | **Total Supply** | 1,000,000,000 |
 | **Presale Allocation** | 30% (300,000,000 tokens) |
 | **Liquidity** | 25% (250,000,000 tokens) |
