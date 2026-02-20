@@ -33,7 +33,7 @@ Anyone can create prediction markets:
 **Binary Markets (YES/NO):**
 - "Will BTC hit $100K by March?"
 - "Will SOL flip ETH in TVL?"
-- "Will Trump win 2028?"
+- "Will this memecoin bond in the next hour?"
 
 **Multi-Choice Markets (up to 10 outcomes):**
 - "Who wins the 2026 World Cup?" → Brazil, Argentina, France, Germany...
