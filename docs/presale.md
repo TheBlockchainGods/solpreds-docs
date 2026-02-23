@@ -190,9 +190,10 @@ We support three chains to make it easy for everyone to participate:
 
 ## Need Help?
 
-- 📧 Email: support@solpreds.fun
+- 📧 Email: theblockchaingods@gmail.com
 - 🐦 Twitter: [@solpreds](https://twitter.com/solpreds)
 - 💬 Telegram: [Join our community](https://t.me/solpreds)
+- 💬 Discord: [Join our community](https://discord.gg/5EE29Xrc58)
 
 ---
 
