@@ -12,11 +12,15 @@ The official SOLPREDS prediction market interface.
 ## 📱 Social Media
 
 ### Twitter/X
-**Handle:** [@SOLPREDS_FUN](https://x.com/SOLPREDS_FUN)  
+**Account:** [@SOLPREDS_FUN](https://x.com/SOLPREDS_FUN)  
 Follow for updates, announcements, and community highlights.
 
 ### Telegram
-**Group:** [t.me/SOLPREDS](https://t.me/SOLPREDS)  
+**Group:** [TELEGRAM](https://t.me/SOLPREDS)  
+Join our community chat for support and discussion.
+
+### Discord
+**Group:** [DISCORD](https://discord.gg/5EE29Xrc58)  
 Join our community chat for support and discussion.
 
 ---
