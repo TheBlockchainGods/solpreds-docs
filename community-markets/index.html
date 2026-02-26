@@ -1458,7 +1458,7 @@
 <td><strong>Creator Earnings</strong></td>
 <td>None</td>
 <td>None</td>
-<td>✅ 1% volume + 2% payouts</td>
+<td>✅ 1% trading fees + 1% liquidity jackpot</td>
 </tr>
 <tr>
 <td><strong>Trading Model</strong></td>
@@ -1474,9 +1474,9 @@
 </tr>
 <tr>
 <td><strong>Market Types</strong></td>
+<td>Binary + Multi-Outcome</td>
 <td>Binary only</td>
-<td>Binary only</td>
-<td>✅ Binary + Multi-Choice (10 outcomes)</td>
+<td>✅ Binary + Multi-Choice</td>
 </tr>
 </tbody>
 </table>
@@ -1488,14 +1488,14 @@
 - "Will BTC hit $100K by March?"
 - "Will SOL flip ETH in TVL?"
 - "Will this memecoin bond in the next hour?"</p>
-<p><strong>Multi-Choice Markets (up to 10 outcomes):</strong>
+<p><strong>Multi-Choice Markets:</strong>
 - "Who wins the 2026 World Cup?" → Brazil, Argentina, France, Germany...
 - "What will SOL price be Dec 31?" → &lt;$100, $100-$200, $200-$500, &gt;$500
 - "Which AI company IPOs first?" → OpenAI, Anthropic, xAI, Mistral</p>
 <p><strong>Creator Benefits:</strong>
-- Earn <strong>1% of all trading volume</strong>
-- Earn <strong>2% of final payouts</strong>
-- No liquidity needed - bonding curve handles it
+- Earn <strong>1% of all trading fees</strong>
+- Earn <strong>1% of the final liquidity jackpot</strong> when market resolves
+- No liquidity needed — bonding curve handles it
 - Claimable earnings dashboard
 - Passive income from market activity</p>
 <p><strong>Cost:</strong> 0.1 SOL (virtual SOL during beta)</p>
@@ -1507,7 +1507,7 @@
 </code></pre></div></p>
 <p>Where:
 - <code>b</code> = dynamic virtual base (adjusts with volume)
-- <code>N</code> = number of outcomes (2 for binary, up to 10 for multi-choice)
+- <code>N</code> = number of outcomes (2 for binary, more for multi-choice)
 - <code>shares_i</code> = shares held for outcome i
 - <code>total_shares</code> = sum of all outcome shares</p>
 <p><strong>Key Features:</strong>
@@ -1542,10 +1542,14 @@
 <h4 id="phase-1-proposal">Phase 1: Proposal</h4>
 <ul>
 <li>Market ends (auto at deadline)</li>
-<li>Validators stake <strong>10,000 $SOLPREDS</strong> (~$200 USD) to propose outcome</li>
+<li>Validators stake <strong>10,000 $SOLPREDS</strong> to propose outcome</li>
 <li><strong>6-hour dispute window</strong> begins</li>
 <li>If undisputed → Validator earns <strong>1% of market pot</strong></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Stake Amount</p>
+<p>During beta, the stake is fixed at 10,000 virtual $SOLPREDS. On mainnet, the required stake targets ~$200 USD equivalent, calculated dynamically using the live $SOLPREDS price via Jupiter.</p>
+</div>
 <h4 id="phase-2-challenge-window-6-hours">Phase 2: Challenge Window (6 hours)</h4>
 <p><strong>Path A - No Dispute (90% of cases):</strong>
 - No one challenges within 6 hours
@@ -1559,7 +1563,7 @@
 <h4 id="phase-3-community-vote-24-hours-if-disputed">Phase 3: Community Vote (24 hours - If Disputed)</h4>
 <ul>
 <li>All $SOLPREDS holders vote</li>
-<li>Voting power = token balance (1 token = 1 vote)</li>
+<li>Voting power is <strong>balance-weighted</strong> — larger holdings carry more influence</li>
 <li><strong>Minimum 3 unique voters</strong> required (quorum)</li>
 <li>Majority wins</li>
 </ul>
@@ -1568,8 +1572,8 @@
 - <strong>50%</strong> → Split among winning voters (by voting power)
 - <strong>25%</strong> → Burned permanently</p>
 <p><strong>This ensures:</strong>
-- ✅ Validators only propose correct outcomes (lose $200 if wrong)
-- ✅ Challengers only dispute when confident (lose $200 if wrong)
+- ✅ Validators only propose correct outcomes (lose stake if wrong)
+- ✅ Challengers only dispute when confident (lose stake if wrong)
 - ✅ Community votes accurately (earn from being right)
 - ✅ No centralized oracle needed</p>
 <hr />
@@ -1620,18 +1624,25 @@
 <tbody>
 <tr>
 <td>Market Creator</td>
-<td>2%</td>
+<td>1%</td>
 </tr>
 <tr>
 <td>Platform</td>
 <td>3%</td>
 </tr>
+<tr>
+<td>Validator Reward</td>
+<td>1%</td>
+</tr>
 </tbody>
 </table>
-<p><strong>Total if you win:</strong> ~8% (3% trade + 5% claim)</p>
+<div class="admonition info">
+<p class="admonition-title">How Fees Apply</p>
+<p>The 3% trade fee is deducted when you buy or sell shares. The 5% claim fee is deducted from your payout when you claim winnings. They apply at different stages and to different amounts.</p>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Creator Earnings</p>
-<p>Popular markets generate passive income! A market with $10,000 volume earns creator $100 (1%) + 2% of final payouts. All earnings are claimable anytime.</p>
+<p>Popular markets generate passive income! A market with $10,000 in trading volume earns the creator $100 (1% of fees) plus 1% of the final liquidity jackpot at resolution. All earnings are claimable anytime from the creator dashboard.</p>
 </div>
 <hr />
 <h2 id="5-level-referral-system">5-Level Referral System</h2>
@@ -1693,7 +1704,7 @@
 - Augur → Failed (oracle problem unsolved)</p>
 <p><strong>SOLPREDS solves this:</strong>
 - ✅ Permissionless validation
-- ✅ Economic penalties for lying ($200 stake loss)
+- ✅ Economic penalties for dishonest proposals (stake loss)
 - ✅ Community voting as backup
 - ✅ No single point of failure</p>
 <hr />
@@ -1711,17 +1722,17 @@
 <hr />
 <h3 id="multi-choice-markets">Multi-Choice Markets</h3>
 <p><strong>Unique to SOLPREDS:</strong>
-- Up to 10 custom outcomes per market
+- Multiple custom outcomes per market
 - More nuanced predictions
 - Higher engagement
 - More trading opportunities</p>
 <p><strong>Examples:</strong>
-- "Which team wins?" → 10 teams
-- "Price range prediction?" → 10 ranges
+- "Which team wins?" → Multiple teams
+- "Price range prediction?" → Multiple ranges
 - "Who's next president?" → Multiple candidates</p>
 <hr />
 <h2 id="example-markets">Example Markets</h2>
-<p>Browse live markets at <strong><a href="https://markets.solpreds.fun">markets.solpreds.fun</a></strong></p>
+<p>Browse live markets at <strong><a href="https://solpreds.fun">solpreds.fun</a></strong></p>
 <div class="admonition example">
 <p class="admonition-title">Active Markets</p>
 <p><strong>Binary:</strong>
@@ -1729,9 +1740,9 @@
 - "Will BTC hit $100K by March?"
 - "Will SOL flip ETH in DeFi TVL?"</p>
 <p><strong>Multi-Choice:</strong>
-- "Who wins the 2026 World Cup?" (10 countries)
-- "SOL price Dec 31?" (10 price ranges)
-- "Which AI company IPOs first?" (5 companies)</p>
+- "Who wins the 2026 World Cup?" (multiple countries)
+- "SOL price Dec 31?" (multiple price ranges)
+- "Which AI company IPOs first?" (multiple companies)</p>
 </div>
 <hr />
 <h2 id="roadmap">Roadmap</h2>
@@ -1769,7 +1780,7 @@
 </tr>
 <tr>
 <td>🟡 $SOLPREDS Presale</td>
-<td>Coming Soon</td>
+<td>In Progress</td>
 </tr>
 <tr>
 <td>⏳ Token Integration</td>
@@ -1788,15 +1799,16 @@
 <hr />
 <h2 id="get-started">Get Started</h2>
 <p><strong>Test Community Markets with virtual tokens:</strong></p>
-<p>👉 <strong><a href="https://markets.solpreds.fun">markets.solpreds.fun</a></strong></p>
+<p>👉 <strong><a href="https://solpreds.fun">solpreds.fun</a></strong></p>
 <p><strong>Join the $SOLPREDS presale:</strong></p>
 <p>👉 <strong><a href="https://presale.solpreds.fun">presale.solpreds.fun</a></strong></p>
 <p><strong>Stay Connected:</strong>
 - 🐦 <a href="https://x.com/SOLPREDS_FUN">Twitter/X</a>
-- 💬 <a href="https://t.me/SOLPREDS">Telegram</a></p>
+- 💬 <a href="https://t.me/SOLPREDS">Telegram</a>
+- 💬 <a href="https://discord.gg/5EE29Xrc58">Discord</a></p>
 <hr />
 <p><a class="md-button" href="../">Back to Home</a>
-<a class="md-button md-button--primary" href="https://solpreds.fun">View Prediction Rounds</a>
+<a class="md-button md-button--primary" href="https://solpreds.fun/solana">View Prediction Rounds</a>
 <a class="md-button md-button--primary" href="https://presale.solpreds.fun">Join Presale</a></p>
 
 
