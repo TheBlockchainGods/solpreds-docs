@@ -1,62 +1,67 @@
 # About SOLPREDS
 
-SOLPREDS is a decentralized prediction market built on Solana, allowing users to predict SOL price movements and earn rewards.
+SOLPREDS is a decentralized prediction market platform built on Solana. It combines fast-paced SOL/USD price prediction rounds with permissionless community-created markets on any topic.
 
-## What is SOLPREDS?
-
-SOLPREDS transforms price prediction into an engaging, on-chain experience. Players bet on whether SOL/USD will go UP or DOWN in 5-minute rounds, with instant payouts to winners.
-
-## Key Features
-
-### ⚡ **Lightning Fast**
-Built on Solana for near-instant transactions and low fees.
-
-### 🎯 **Simple & Fair**
-No complex options or leverage. Just UP or DOWN. Winner-take-all pool system ensures transparent payouts.
-
-### 🔒 **Non-Custodial**
-Your wallet, your keys. We never hold your funds - all bets are on-chain smart contracts.
-
-### 📊 **Real-Time Data**
-Powered by Pyth Network oracle for accurate, tamper-proof SOL price feeds.
-
-### 💰 **Referral Rewards**
-Earn from your network! Multi-level referral system rewards you for bringing friends.
-
-## How It Works
-
-1. **Connect Wallet** - Use Phantom, Backpack, or any Solana wallet
-2. **Choose Direction** - Bet UP or DOWN on next round
-3. **Watch Price** - Round locks, price is captured from Pyth oracle
-4. **Claim Winnings** - Winners split the pool proportionally
-
-## Fees
-
-- **2% bet fee** - Taken when you place bet
-- **5% win fee** - Taken from your winnings
-- **Net revenue:** 69% to protocol, 31% to referral tree
-
-## Technology
-
-- **Blockchain:** Solana (Devnet for testing)
-- **Smart Contract:** Rust/Anchor
-- **Price Oracle:** Pyth Network
-- **Program ID:** `2BiVb6opV9DbgJu9DWSRMkuA53skap7XgYo7EEBSNn21`
-
-## Roadmap
-
-See our [Roadmap](guide/roadmap.md) for upcoming features.
-
-## Community
-
-- **Website:** [SOLPREDS.FUN](https://SOLPREDS.FUN)
-- **Twitter:** [@SOLPREDS_FUN](https://x.com/SOLPREDS_FUN)
-- **Telegram:** [t.me/SOLPREDS](https://t.me/SOLPREDS)
-
-## For Developers
-
-Build bots and integrations with our public API. See [Developer Quickstart](developers/quickstart.md).
+For a full platform overview, see the [Introduction](guide/introduction.md).
 
 ---
 
-**Disclaimer:** SOLPREDS is currently on Solana Devnet for testing. Testnet SOL has no real value. Use at your own risk.
+## Fees
+
+| Fee | Amount | When |
+|-----|--------|------|
+| Bet fee | 2% | Deducted when placing a bet |
+| Win fee | 5% | Deducted from winnings |
+
+**Fee distribution:** 69% to protocol, 31% to referral tree
+
+---
+
+## Technology
+
+| Component | Details |
+|-----------|---------|
+| Blockchain | Solana |
+| Smart Contract | Rust / Anchor |
+| Price Oracle | Pyth Network |
+| Program ID | `2BiVb6opV9DbgJu9DWSRMkuA53skap7XgYo7EEBSNn21` |
+
+---
+
+## Network Status
+
+| Platform | Network | URL |
+|----------|---------|-----|
+| Prediction Rounds | Mainnet | [solpreds.fun/solana](https://solpreds.fun/solana) |
+| Prediction Rounds | Devnet | [devnet.solpreds.fun/solana](https://devnet.solpreds.fun/solana) |
+| Community Markets | Beta | [solpreds.fun](https://solpreds.fun) |
+| Presale | Live | [presale.solpreds.fun](https://presale.solpreds.fun) |
+
+---
+
+## Community
+
+- 🌐 [solpreds.fun](https://solpreds.fun)
+- 🐦 [@SOLPREDS_FUN on X](https://x.com/SOLPREDS_FUN)
+- 💬 [Telegram](https://t.me/SOLPREDS)
+- 💬 [Discord](https://discord.gg/5EE29Xrc58)
+
+---
+
+## For Developers
+
+Build bots and integrations with the public API. See the [Developer Quickstart](developers/quickstart.md).
+
+---
+
+## Useful Links
+
+- [Introduction](guide/introduction.md) — full platform overview
+- [Roadmap](guide/roadmap.md) — what's built and what's coming
+- [Airdrop](airdrop.md) — earn $SOLPREDS for playing
+- [Presale](presale.md) — join the token presale
+
+---
+
+!!! warning "Disclaimer"
+    SOLPREDS is unaudited software. Prediction Rounds on mainnet involve real SOL. Community Markets currently uses virtual balances during beta. Participate at your own risk.
