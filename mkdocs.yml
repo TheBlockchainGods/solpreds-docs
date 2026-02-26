@@ -34,6 +34,7 @@ nav:
   - Presale: presale.md
   - Community Markets: community-markets.md
   - Airdrop: airdrop.md
+  - About: about.md
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -59,8 +60,11 @@ extra:
     - icon: fontawesome/brands/telegram
       link: https://t.me/SOLPREDS
       name: Join our Telegram
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/5EE29Xrc58
+      name: Join our Discord
     - icon: fontawesome/solid/globe
-      link: https://SOLPREDS.FUN
+      link: https://solpreds.fun
       name: Visit SOLPREDS
 
 plugins:
