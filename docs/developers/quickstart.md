@@ -14,8 +14,6 @@ Build bots to trade on the Solana prediction market.
 **REST API:** `https://solpreds.fun/api/bot`  
 **WebSocket:** `wss://solpreds.fun`
 
----
-
 ## Available Endpoints
 
 | Endpoint | Method | Auth | Description |
@@ -31,10 +29,7 @@ Build bots to trade on the Solana prediction market.
 | `/auth/positions` | GET | Yes | Your detailed positions |
 | `/auth/prepare-bet` | POST | Yes | Get transaction data |
 
----
-
 ## Authentication Flow
-
 ```
 1. GET /auth/nonce?wallet=YOUR_WALLET
    → Returns { nonce, message, expiresIn }
@@ -51,10 +46,7 @@ Build bots to trade on the Solana prediction market.
 
 Token expires in 24 hours.
 
----
-
 ## Quick Code Example
-
 ```javascript
 const nacl = require('tweetnacl');
 const bs58 = require('bs58');
@@ -118,8 +110,6 @@ function connectWebSocket() {
 })();
 ```
 
----
-
 ## WebSocket Events
 
 | Event | Trigger | Data |
@@ -128,18 +118,14 @@ function connectWebSocket() {
 | `bet_activity` | New bet placed | wallet, amount, side, roundId |
 | `round-settled` | Round resolved | roundId, outcome, prices, payout |
 
----
-
 ## Rate Limits
 
 - **Public endpoints:** 100 req/min per IP
 - **Authenticated endpoints:** 100 reads/min, 10 writes/min per wallet
 - **Headers:** `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset`
 
----
-
 ## Next Steps
 
 - [Full API Reference](api-reference.md)
-- [WebSocket Reference](websocket-reference.md)
-- [Code Examples](code-examples.md)
+- [WebSocket Reference](websocket.md)
+- [Code Examples](examples.md)

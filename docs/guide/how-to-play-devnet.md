@@ -1,3 +1,51 @@
+# How To Play SOLPREDS (Devnet)
+
+Devnet is a risk-free testing environment using fake SOL. Perfect for trying out the platform before playing with real funds.
+
+## Wallet Setup
+
+### Step 1: Install a Solana Wallet
+
+We recommend [Phantom Wallet](https://phantom.app):
+
+1. Visit [phantom.app](https://phantom.app)
+2. Download browser extension
+3. Create new wallet or import existing
+4. **Save your seed phrase securely!**
+
+!!! warning "Keep Your Seed Phrase Safe"
+    Never share your seed phrase with anyone. SOLPREDS will never ask for it.
+
+### Step 2: Switch to Devnet
+
+1. Open Phantom wallet
+2. Click ⚙️ Settings → Developer Settings → Testnet Mode
+3. Select **Devnet**
+
+### Step 3: Get Free Devnet SOL
+
+**Option A: Solana Faucet**
+1. Visit [faucet.solana.com](https://faucet.solana.com)
+2. Paste your wallet address
+3. Click "Airdrop 2 SOL"
+
+**Option B: Ask in Community**
+Tag [@SOLPREDS_FUN on X](https://x.com/SOLPREDS_FUN) with your address
+
+---
+
+## Placing Bets
+
+### Understanding Rounds
+
+Each round has 3 phases:
+```mermaid
+graph LR
+    A[Entry Phase<br/>5 min] --> B[Locked<br/>price set]
+    B --> C[Live Phase<br/>5 min]
+    C --> D[Closed<br/>winners decided]
+```
+
 **Entry Phase** (5 mins): Place your bet on UP or DOWN
 
 **Lock**: Betting closes, lock price is set
@@ -9,7 +57,7 @@
 ### How to Bet
 
 1. **Connect Wallet**
-   - Click "Connect Wallet" on [solpreds.fun/solana](https://solpreds.fun/solana)
+   - Click "Connect Wallet" on [devnet.solpreds.fun/solana](https://devnet.solpreds.fun/solana)
    - Approve connection
 
 2. **Choose Direction**
@@ -61,6 +109,9 @@ Fees are applied in two steps: a **2% bet fee** when placing, and a **5% win fee
     
     Win fee: 5% (deducted from winnings)
 
+!!! note "Devnet SOL has no real value"
+    All winnings and losses on devnet are simulated. Switch to [mainnet](how-to-play.md) to play with real SOL.
+
 ---
 
 ## Strategy Tips
@@ -87,14 +138,14 @@ Bet early to lock in better multipliers
 ??? question "Transaction failed?"
     **Check these:**
     
-    - Do you have enough SOL for gas?
-    - Are you on Mainnet network?
+    - Do you have enough devnet SOL? Get more at [faucet.solana.com](https://faucet.solana.com)
+    - Are you on Devnet network in Phantom?
     - Try increasing priority fee in wallet
 
 ??? question "Can't see my bet?"
     **Refresh the page** and reconnect wallet
     
-    Check transaction on [Solana Explorer](https://explorer.solana.com)
+    Check transaction on [Solana Explorer (Devnet)](https://explorer.solana.com/?cluster=devnet)
 
 ??? question "Claim button disabled?"
     **Round might still be live.** Wait for it to close.

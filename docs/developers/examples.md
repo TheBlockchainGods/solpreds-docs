@@ -1,11 +1,9 @@
 # SOLPREDS Code Examples
-
 Working examples for common bot patterns.
 
 ---
 
 ## 1. Simple Trading Bot
-
 Authenticates, fetches market data, and prepares a bet.
 
 ```javascript
@@ -28,19 +26,19 @@ async function authenticate() {
   // Get nonce
   const nonceRes = await fetch(`${API}/auth/nonce?wallet=${wallet}`);
   const { nonce, message } = await nonceRes.json();
-  
+
   // Sign message
   const messageBytes = new TextEncoder().encode(message);
   const signature = nacl.sign.detached(messageBytes, keypair.secretKey);
   const signatureB58 = bs58.encode(signature);
-  
+
   // Verify and get token
   const verifyRes = await fetch(`${API}/auth/verify`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ wallet, nonce, signature: signatureB58 }),
   });
-  
+
   const data = await verifyRes.json();
   authToken = data.token;
   console.log('Authenticated, expires:', data.expiresAt);
@@ -56,7 +54,7 @@ async function getMarket() {
 // Prepare a bet (get transaction data)
 async function prepareBet(roundId, side, amountSol) {
   const amount = Math.floor(amountSol * 1e9); // Convert to lamports
-  
+
   const res = await fetch(`${API}/auth/prepare-bet`, {
     method: 'POST',
     headers: {
@@ -65,7 +63,7 @@ async function prepareBet(roundId, side, amountSol) {
     },
     body: JSON.stringify({ roundId, side, amount }),
   });
-  
+
   return res.json();
 }
 
@@ -81,26 +79,27 @@ async function getMyPositions() {
 async function main() {
   // Authenticate
   await authenticate();
-  
+
   // Get market data
   const market = await getMarket();
   console.log('Current round:', market.currentRoundId);
-  
+
   if (market.next) {
     const { roundId, upPayout, downPayout, timeRemaining } = market.next;
     console.log(`Next round ${roundId}:`);
     console.log(`  UP: ${upPayout.toFixed(2)}x | DOWN: ${downPayout.toFixed(2)}x`);
     console.log(`  Time: ${Math.round(timeRemaining / 1000)}s remaining`);
-    
+
     // Simple strategy: bet on higher payout side
-    const side = upPayout > downPayout ? 'Up' : 'Down';
+    const side = upPayout > downPayout ? 'UP' : 'DOWN';
     const payout = Math.max(upPayout, downPayout);
-    
-    // Only bet if payout > 2x
+
+    // Only bet if payout > 2x and enough time remains
+    // Minimum bet is 0.001 SOL (1,000,000 lamports)
     if (payout > 2.0 && timeRemaining > 30000) {
       console.log(`Preparing ${side} bet...`);
-      const betData = await prepareBet(roundId, side, 0.01); // 0.01 SOL
-      
+      const betData = await prepareBet(roundId, side, 0.001); // 0.001 SOL minimum
+
       if (betData.success) {
         console.log('Bet prepared:', betData);
         console.log('Accounts:', betData.accounts);
@@ -111,7 +110,7 @@ async function main() {
       }
     }
   }
-  
+
   // Check positions
   const positions = await getMyPositions();
   console.log('\nMy positions:', positions.summary);
@@ -123,8 +122,9 @@ main().catch(console.error);
 ---
 
 ## 2. WebSocket Listener
-
 Monitors market in real-time and logs events.
+
+> **Note:** The `market-update` event does **not** include payout multipliers (`upPayout`/`downPayout`). Use the REST `GET /market` endpoint to get payouts, and calculate them yourself from pool ratios if needed.
 
 ```javascript
 const io = require('socket.io-client');
@@ -142,19 +142,27 @@ socket.on('connect_error', (err) => {
 });
 
 // Market updates every 10 seconds
+// Note: upPool/downPool are in lamports. Payout multipliers are not included here —
+// fetch GET /market if you need them.
 socket.on('market-update', (data) => {
   const timestamp = new Date().toLocaleTimeString();
-  
+
   if (data.live) {
-    const { roundId, upPayout, downPayout, timeRemaining } = data.live;
-    console.log(`[${timestamp}] LIVE #${roundId}: UP ${upPayout.toFixed(2)}x | DOWN ${downPayout.toFixed(2)}x | ${Math.round(timeRemaining/1000)}s`);
+    const { roundId, upPool, downPool, timeRemaining } = data.live;
+    const totalPool = ((upPool + downPool) / 1e9).toFixed(2);
+    console.log(`[${timestamp}] LIVE #${roundId}: Pool ${totalPool} SOL | ${Math.round(timeRemaining / 1000)}s`);
   }
-  
+
   if (data.next) {
-    const { roundId, upPayout, downPayout, upPool, downPool, timeRemaining } = data.next;
+    const { roundId, upPool, downPool, timeRemaining } = data.next;
     const totalPool = (upPool + downPool) / 1e9;
-    console.log(`[${timestamp}] NEXT #${roundId}: UP ${upPayout.toFixed(2)}x | DOWN ${downPayout.toFixed(2)}x | Pool: ${totalPool.toFixed(2)} SOL | ${Math.round(timeRemaining/1000)}s`);
-    
+
+    // Calculate payouts from pool ratios (95% payout pool)
+    const upPayout = totalPool > 0 ? (totalPool * 0.95) / (upPool / 1e9) : 0;
+    const downPayout = totalPool > 0 ? (totalPool * 0.95) / (downPool / 1e9) : 0;
+
+    console.log(`[${timestamp}] NEXT #${roundId}: UP ~${upPayout.toFixed(2)}x | DOWN ~${downPayout.toFixed(2)}x | Pool: ${totalPool.toFixed(2)} SOL | ${Math.round(timeRemaining / 1000)}s`);
+
     // Alert on opportunities
     if (upPayout > 3.0) console.log('[ALERT] High UP payout!');
     if (downPayout > 3.0) console.log('[ALERT] High DOWN payout!');
@@ -162,20 +170,22 @@ socket.on('market-update', (data) => {
 });
 
 // New bets
+// Note: data.amount is already in SOL (not lamports). data.side is "UP" or "DOWN".
 socket.on('bet_activity', (data) => {
-  const solAmount = (data.amount / 1e9).toFixed(2);
+  const solAmount = data.amount.toFixed(2); // Already in SOL — do NOT divide by 1e9
   const user = data.username || data.wallet.slice(0, 8) + '...';
   console.log(`BET: ${user} placed ${solAmount} SOL on ${data.side} (Round #${data.roundId})`);
 });
 
 // Round settlements
+// Note: winningPayout is sent as a string (already formatted server-side).
 socket.on('round-settled', (data) => {
   console.log('');
   console.log('='.repeat(50));
   console.log(`SETTLED: Round #${data.roundId}`);
   console.log(`  Winner: ${data.outcome}`);
   console.log(`  Price: $${data.startPrice.toFixed(2)} → $${data.closePrice.toFixed(2)}`);
-  console.log(`  Payout: ${data.winningPayout.toFixed(2)}x`);
+  console.log(`  Payout: ${data.winningPayout}x`); // Already a string — don't call .toFixed()
   console.log('='.repeat(50));
   console.log('');
 });
@@ -198,7 +208,6 @@ console.log('Listening for events... (Ctrl+C to exit)');
 ---
 
 ## 3. Position Tracker
-
 Monitors a wallet's positions and calculates P&L.
 
 ```javascript
@@ -228,13 +237,13 @@ async function displayPositions() {
   console.log(`SOLPREDS Position Tracker - ${new Date().toLocaleTimeString()}`);
   console.log(`Wallet: ${WALLET.slice(0, 8)}...${WALLET.slice(-8)}`);
   console.log('='.repeat(60));
-  
+
   try {
     const [positions, market] = await Promise.all([
       fetchPositions(),
       fetchMarket()
     ]);
-    
+
     // Summary
     const { summary } = positions;
     console.log('\nSUMMARY:');
@@ -243,7 +252,7 @@ async function displayPositions() {
     console.log(`  Win Rate: ${(summary.winRate * 100).toFixed(1)}%`);
     console.log(`  Total P&L: ${formatSol(summary.totalPnl)} SOL`);
     console.log(`  Total Volume: ${formatSol(summary.totalVolume)} SOL`);
-    
+
     // Open positions
     const open = positions.positions.filter(p => p.status === 'pending');
     if (open.length > 0) {
@@ -254,7 +263,7 @@ async function displayPositions() {
         console.log(`  Round #${pos.roundId} [${status}]: ${formatSol(pos.amount)} SOL on ${pos.side}`);
       }
     }
-    
+
     // Recent settled
     const settled = positions.positions.filter(p => p.status !== 'pending').slice(0, 5);
     if (settled.length > 0) {
@@ -265,17 +274,17 @@ async function displayPositions() {
         console.log(`  Round #${pos.roundId}: ${pos.side} ${pos.status.toUpperCase()} | ${emoji}${formatSol(Math.abs(pnl))} SOL`);
       }
     }
-    
+
     // Current market
     console.log('\nCURRENT MARKET:');
     if (market.next) {
       console.log(`  Next Round #${market.next.roundId}: UP ${market.next.upPayout?.toFixed(2)}x | DOWN ${market.next.downPayout?.toFixed(2)}x`);
     }
-    
+
   } catch (err) {
     console.error('Error:', err.message);
   }
-  
+
   console.log('\n' + '-'.repeat(60));
   console.log('Refreshing every 30 seconds... (Ctrl+C to exit)');
 }
@@ -294,7 +303,6 @@ process.on('SIGINT', () => {
 ```
 
 **Usage:**
-
 ```bash
 node position-tracker.js YOUR_WALLET_ADDRESS
 ```
@@ -302,7 +310,6 @@ node position-tracker.js YOUR_WALLET_ADDRESS
 ---
 
 ## Dependencies
-
 All examples require:
 
 ```bash
@@ -310,9 +317,8 @@ npm install tweetnacl bs58 @solana/web3.js socket.io-client
 ```
 
 Set your private key:
-
 ```bash
 export SOLANA_PRIVATE_KEY="your-base58-private-key"
 ```
 
-**⚠️ Never commit private keys to version control.**
+> ⚠️ **Never commit private keys to version control.**

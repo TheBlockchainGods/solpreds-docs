@@ -4,8 +4,13 @@ All verified SOLPREDS channels and resources.
 
 ## 🌐 Main Platform
 
-**Website:** [https://SOLPREDS.FUN](https://SOLPREDS.FUN)  
+**PREDICTION MARKETS:** [https://SOLPREDS.FUN](https://SOLPREDS.FUN)  
 The official SOLPREDS prediction market interface.
+
+**SOL PRICE UP/DOWN** [https://SOLPREDS.FUN/SOLANA](https://SOLPREDS.FUN/SOLANA)  
+Predict the price of Solana up or Down (more markets soon)
+
+**DEVNET** [https://devnet.SOLPREDS.FUN/SOLANA](https://devnet.SOLPREDS.FUN/SOLANA)  
 
 ---
 
@@ -33,7 +38,6 @@ Complete API reference and developer guides.
 
 ### GitHub
 **Repository:** [github.com/TheBlockchainGods/Solana-Stake](https://github.com/TheBlockchainGods/Solana-Stake)  
-Open-source smart contracts and frontend code.
 
 ### API Endpoint
 **Base URL:** `https://solpreds.fun/api/bot`  
@@ -48,7 +52,7 @@ Real-time market updates.
 ## 🔗 Solana Resources
 
 ### Program
-**Program ID:** `2BiVb6opV9DbgJu9DWSRMkuA53skap7XgYo7EEBSNn21`  
+**Program ID:** `2Bivb6opV9DbgJu9DWSRMkuA53skap7XgYo7EEBSNn21`  
 View on [Solana Explorer (Devnet)](https://explorer.solana.com/address/2BiVb6opV9DbgJu9DWSRMkuA53skap7XgYo7EEBSNn21?cluster=devnet)
 
 ### Get Devnet SOL
@@ -63,11 +67,15 @@ Get free testnet SOL to play on devnet.
 
 **Official domains:**
 - `solpreds.fun`
+- `presale.solpreds.fun`
+- `solpreds.fun/solana`
+- `devnet.solpreds.fun`
 - `docs.solpreds.fun`
 
 **Official social:**
 - Twitter: `@SOLPREDS_FUN`
 - Telegram: `@SOLPREDS` (group)
+- DISCORD: `@SOLPREDS` (group)
 
 **⚠️ Beware of impersonators!** Always verify URLs before connecting your wallet.
 
@@ -78,7 +86,3 @@ Get free testnet SOL to play on devnet.
 For partnerships, press inquiries, or security reports:
 
 **Email:** Contact via [Telegram](https://t.me/SOLPREDS) or [Twitter DM](https://x.com/SOLPREDS_FUN)
-
----
-
-**Note:** SOLPREDS is currently on Solana Devnet for testing. Mainnet launch TBA.

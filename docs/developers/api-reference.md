@@ -6,6 +6,18 @@
 
 ---
 
+## Overview
+
+The SOLPREDS Bot API provides endpoints for programmatic betting on Solana price predictions. 
+
+**Important:** This API prepares transaction data for your bot to sign and submit. The server does NOT submit transactions on your behalf. Your bot must:
+1. Call `/auth/prepare-bet` to get transaction accounts and instructions
+2. Construct the transaction client-side
+3. Sign with your wallet keypair
+4. Submit to Solana RPC yourself
+
+---
+
 ## Authentication Endpoints
 
 ### Get Nonce
@@ -62,7 +74,11 @@ const signature = nacl.sign.detached(messageBytes, keypair.secretKey);
 const res = await fetch(`${API}/auth/verify`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ wallet, nonce, signature: bs58.encode(signature) }),
+  body: JSON.stringify({ 
+    wallet, 
+    nonce, 
+    signature: bs58.encode(signature) 
+  }),
 });
 const { token } = await res.json();
 ```
@@ -186,11 +202,18 @@ const { token } = await res.json();
   "betFeePercent": 2,
   "winFeePercent": 5,
   "referralLevels": 5,
-  "minBetLamports": 10000000,
-  "maxBetLamports": 100000000000,
+  "referralPercentages": [25, 3.5, 2.5, 2, 1],
+  "minBetLamports": 1000000,
+  "minBetSol": 0.001,
+  "maxBetPerUserPerRoundSol": 1000,
   "payoutFormula": {
     "description": "Winner payout = (betAmount * 0.98) * (totalPool / winningPool) * 0.95",
     "example": "1 SOL bet, 10 SOL total, 5 SOL winning: 1.862 SOL"
+  },
+  "edgeCases": {
+    "tie": "If startPrice === closePrice, all bets refunded minus fees",
+    "oracleFailure": "If price unavailable at closeTime, round void, all bets refunded",
+    "emptyPool": "If no bets on winning side, losing side gets refund minus fees"
   },
   "phases": {
     "NEXT": "Betting open until lockTime",
@@ -198,9 +221,12 @@ const { token } = await res.json();
     "RESOLVED": "Winners determined"
   },
   "network": "mainnet-beta",
-  "programId": "YOUR_MAINNET_PROGRAM_ID"
+  "programId": "2Bivb6opV9DbgJu9DWSRMkuA53skap7XgYo7EEBSNn21",
+  "pythFeed": "H6ARHf6YXhGYeQfUzQNGk6rDNnLBQKrenN712K4AQJEG"
 }
 ```
+
+**Note:** `minBetLamports` is **1,000,000 (0.001 SOL)**, not 10,000,000.
 
 ---
 
@@ -264,6 +290,28 @@ const { token } = await res.json();
 
 ---
 
+### Get API Documentation
+
+`GET /docs`
+
+**Auth:** Not required
+
+**Response:**
+```json
+{
+  "version": "2.0",
+  "endpoints": {
+    "public": [...],
+    "authenticated": [...]
+  },
+  "examples": {...}
+}
+```
+
+Returns a self-describing API reference with all available endpoints, parameters, and examples.
+
+---
+
 ## Authenticated Endpoints
 
 ### Get My Positions
@@ -314,7 +362,7 @@ const { token } = await res.json();
 **Body:**
 - `roundId` (number): Round to bet on
 - `side` (string): "Up" or "Down"
-- `amount` (number): Amount in lamports (min 10,000,000)
+- `amount` (number): Amount in lamports (min 1,000,000 = 0.001 SOL)
 
 **Response:**
 ```json
@@ -328,13 +376,14 @@ const { token } = await res.json();
   "timeRemaining": 180000,
   "serverTime": 1234567710,
   "accounts": {
-    "programId": "YOUR_MAINNET_PROGRAM_ID",
-    "globalState": "[PDA - derive with seeds=['global']]",
+    "programId": "2Bivb6opV9DbgJu9DWSRMkuA53skap7XgYo7EEBSNn21",
+    "globalState": "7vMW8kVqWzqXoZ8T1L4m3UfDJNnzrqeN5K3rJYjLp9Qr",
     "roundState": "[PDA - derive with seeds=['round', roundId]]",
     "vault": "[PDA - derive with seeds=['vault', roundState, 'up' or 'down']]",
     "position": "[PDA - derive with seeds=['position', roundState, userWallet]]",
     "feeVault": "[PDA - derive with seeds=['fee_vault']]",
-    "userWallet": "YOUR_WALLET_ADDRESS"
+    "userWallet": "YOUR_WALLET_ADDRESS",
+    "systemProgram": "11111111111111111111111111111111"
   },
   "instructions": {
     "method": "place_bet_or_create",
@@ -351,113 +400,154 @@ const { token } = await res.json();
 }
 ```
 
-!!! info "Optimization Note"
-    As of February 2026, the program uses `place_bet_or_create` for all bets. This instruction automatically creates rounds if they don't exist, eliminating the need for separate round creation logic.
+!!! warning "Client-Side Transaction Construction Required"
+    This endpoint **only prepares** the bet data. You must:
+    
+    1. Use the returned `accounts` and `instructions` to build the transaction
+    2. Sign it with your wallet keypair
+    3. Submit it to Solana RPC yourself
+    
+    The server does NOT submit transactions on your behalf.
 
-**Errors:**
-- `400`: Missing fields, invalid side, amount too low
-- `400`: Round locked for betting
-
----
-
-### Place Bet
-
-`POST /auth/bet`
-
-**Auth:** Required (Bearer token)
-
-**Body:**
-- `side` (string): "Up" or "Down"
-- `amount` (number): Amount in lamports (min 10,000,000)
-
-**Response:**
-```json
-{
-  "success": true,
-  "txHash": "5X7g...",
-  "roundId": 3995,
-  "side": "Up",
-  "amount": 100000000,
-  "amountSol": 0.1,
-  "timestamp": "2026-02-10T12:00:00.000Z"
-}
-```
-
-!!! success "Automatic Round Creation"
-    Rounds are created automatically if they don't exist. You don't need to check round status before betting.
-
-**Example:**
+**Example (Client-Side Transaction Construction):**
 ```javascript
-const response = await fetch(`${API}/auth/bet`, {
+import { Connection, Transaction, TransactionInstruction, PublicKey } from '@solana/web3.js';
+import * as borsh from 'borsh';
+
+// 1. Get prepared bet data
+const response = await fetch(`${API}/auth/prepare-bet`, {
   method: 'POST',
   headers: {
     'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({
+    roundId: 3995,
     side: 'Up',
     amount: 100_000_000 // 0.1 SOL
   })
 });
 
-const { txHash, roundId } = await response.json();
-console.log(`Bet placed! TX: ${txHash}, Round: ${roundId}`);
+const { accounts, instructions } = await response.json();
+
+// 2. Build transaction instruction
+const instructionData = borsh.serialize(
+  InstructionSchema, // Define based on your program IDL
+  {
+    instruction: 'PlaceBetOrCreate',
+    side: instructions.args.side,
+    amount: instructions.args.amount
+  }
+);
+
+const ix = new TransactionInstruction({
+  keys: [
+    { pubkey: new PublicKey(accounts.globalState), isSigner: false, isWritable: true },
+    { pubkey: new PublicKey(accounts.roundState), isSigner: false, isWritable: true },
+    { pubkey: new PublicKey(accounts.vault), isSigner: false, isWritable: true },
+    { pubkey: new PublicKey(accounts.position), isSigner: false, isWritable: true },
+    { pubkey: new PublicKey(accounts.feeVault), isSigner: false, isWritable: true },
+    { pubkey: keypair.publicKey, isSigner: true, isWritable: true },
+    { pubkey: new PublicKey(accounts.systemProgram), isSigner: false, isWritable: false }
+  ],
+  programId: new PublicKey(accounts.programId),
+  data: Buffer.from(instructionData)
+});
+
+// 3. Sign and send
+const tx = new Transaction().add(ix);
+const connection = new Connection('https://api.mainnet-beta.solana.com');
+const signature = await connection.sendTransaction(tx, [keypair]);
+await connection.confirmTransaction(signature);
+
+console.log(`Bet placed! TX: ${signature}`);
 ```
 
+**Minimum Bet:** 1,000,000 lamports (0.001 SOL)
+
 **Errors:**
-- `400`: Invalid side or amount
+- `400`: Missing fields, invalid side, amount too low
+- `400`: Round locked for betting
+- `400`: Amount below minimum (1,000,000 lamports)
 - `401`: Invalid or expired token
-- `400`: Round locked (betting window closed)
-- `500`: Transaction failed
 
 ---
 
-### Claim Winnings
+### Claiming Winnings
 
-`POST /auth/claim`
+!!! warning "No Server-Side Claim Endpoint"
+    There is **NO** `POST /auth/claim` endpoint. You must construct and submit the claim transaction yourself using the Solana program directly.
 
-**Auth:** Required (Bearer token)
+**To claim winnings:**
 
-**Body:**
-- `roundId` (number): Round to claim from
+1. Query your positions with `GET /auth/positions` to find unclaimed wins
+2. For each unclaimed position, construct a `claim_winnings` transaction:
+   - Program: `2Bivb6opV9DbgJu9DWSRMkuA53skap7XgYo7EEBSNn21`
+   - Instruction: `claim_winnings`
+   - Accounts: globalState, roundState, position, vault, userWallet, systemProgram
+3. Sign and submit the transaction
 
-**Response:**
-```json
-{
-  "success": true,
-  "txHash": "9Kp2...",
-  "roundId": 3993,
-  "payout": 186200000,
-  "payoutSol": 0.1862,
-  "rentRefund": 1130000,
-  "rentRefundSol": 0.00113
+**Example (Client-Side Claim):**
+```javascript
+import { Connection, Transaction, TransactionInstruction, PublicKey } from '@solana/web3.js';
+
+// 1. Get unclaimed positions
+const positionsRes = await fetch(`${API}/auth/positions`, {
+  headers: { 'Authorization': `Bearer ${token}` }
+});
+const { positions } = await positionsRes.json();
+
+const unclaimedWins = positions.filter(p => 
+  p.status === 'won' && !p.claimed
+);
+
+// 2. For each unclaimed win, build claim transaction
+for (const pos of unclaimedWins) {
+  const [roundState] = PublicKey.findProgramAddressSync(
+    [Buffer.from('round'), Buffer.from(pos.roundId.toString())],
+    new PublicKey(PROGRAM_ID)
+  );
+  
+  const [position] = PublicKey.findProgramAddressSync(
+    [Buffer.from('position'), roundState.toBuffer(), keypair.publicKey.toBuffer()],
+    new PublicKey(PROGRAM_ID)
+  );
+  
+  const [vault] = PublicKey.findProgramAddressSync(
+    [Buffer.from('vault'), roundState.toBuffer(), Buffer.from(pos.side.toLowerCase())],
+    new PublicKey(PROGRAM_ID)
+  );
+  
+  // Build claim instruction
+  const instructionData = borsh.serialize(
+    InstructionSchema,
+    { instruction: 'ClaimWinnings' }
+  );
+  
+  const ix = new TransactionInstruction({
+    keys: [
+      { pubkey: globalState, isSigner: false, isWritable: true },
+      { pubkey: roundState, isSigner: false, isWritable: true },
+      { pubkey: position, isSigner: false, isWritable: true },
+      { pubkey: vault, isSigner: false, isWritable: true },
+      { pubkey: keypair.publicKey, isSigner: true, isWritable: true },
+      { pubkey: SystemProgram.programId, isSigner: false, isWritable: false }
+    ],
+    programId: new PublicKey(PROGRAM_ID),
+    data: Buffer.from(instructionData)
+  });
+  
+  // Sign and send
+  const tx = new Transaction().add(ix);
+  const signature = await connection.sendTransaction(tx, [keypair]);
+  await connection.confirmTransaction(signature);
+  
+  console.log(`Claimed ${pos.pnlSol} SOL from round ${pos.roundId}. TX: ${signature}`);
 }
 ```
 
 !!! success "Rent Refund"
-    As of February 2026, claiming automatically closes your Position account and refunds ~0.00113 SOL rent back to your wallet. This happens automatically—no extra steps needed.
-
-**Example:**
-```javascript
-const response = await fetch(`${API}/auth/claim`, {
-  method: 'POST',
-  headers: {
-    'Authorization': `Bearer ${token}`,
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    roundId: 3993
-  })
-});
-
-const { payout, rentRefund } = await response.json();
-console.log(`Claimed ${payout} lamports + ${rentRefund} rent refund`);
-```
-
-**Errors:**
-- `400`: Round not resolved yet
-- `400`: Position not found or already claimed
-- `400`: You didn't win this round
+    Claiming automatically closes your Position account and refunds ~0.00113 SOL rent back to your wallet. This happens automatically—no extra steps needed.
 
 ---
 
@@ -517,12 +607,105 @@ The SOLPREDS program was optimized for mainnet deployment with the following imp
 - ✅ Automatic round creation (no need to check if round exists)
 - ✅ Automatic Position account cleanup on claim (rent refunded)
 
-**Migration Required:** None. All existing bots and integrations continue to work without changes. The backend automatically uses the optimized instruction.
+**Migration Required:** None. All existing bots continue to work. The `/auth/prepare-bet` endpoint automatically uses the optimized instruction.
 
 **Impact:**
 - ~50% reduction in effective per-bet costs for users
 - Estimated savings: ~135 SOL/year at scale
 - Zero breaking changes for API consumers
+
+---
+
+## Quick Start Guide
+
+**1. Authenticate:**
+```javascript
+// Get nonce
+const { message } = await fetch(`${API}/auth/nonce?wallet=${wallet}`).then(r => r.json());
+
+// Sign message
+const signature = nacl.sign.detached(
+  Buffer.from(message, 'utf8'), 
+  keypair.secretKey
+);
+
+// Verify and get token
+const { token } = await fetch(`${API}/auth/verify`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    wallet,
+    nonce,
+    signature: bs58.encode(signature)
+  })
+}).then(r => r.json());
+```
+
+**2. Get Market State:**
+```javascript
+const market = await fetch(`${API}/market`).then(r => r.json());
+console.log(`Next round: ${market.next.roundId}, UP payout: ${market.next.upPayout}x`);
+```
+
+**3. Place Bet:**
+```javascript
+// Prepare bet
+const prepared = await fetch(`${API}/auth/prepare-bet`, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    roundId: market.next.roundId,
+    side: 'Up',
+    amount: 100_000_000 // 0.1 SOL
+  })
+}).then(r => r.json());
+
+// Build, sign, and submit transaction (see examples above)
+const tx = buildTransaction(prepared.accounts, prepared.instructions);
+const signature = await connection.sendTransaction(tx, [keypair]);
+```
+
+**4. Check Positions:**
+```javascript
+const { positions } = await fetch(`${API}/auth/positions`, {
+  headers: { 'Authorization': `Bearer ${token}` }
+}).then(r => r.json());
+
+console.log(`You have ${positions.length} positions`);
+```
+
+**5. Claim Winnings:**
+```javascript
+// Find unclaimed wins
+const wins = positions.filter(p => p.status === 'won' && !p.claimed);
+
+// Build and submit claim transactions (see examples above)
+for (const win of wins) {
+  const claimTx = buildClaimTransaction(win);
+  await connection.sendTransaction(claimTx, [keypair]);
+}
+```
+
+---
+
+## Important Notes
+
+!!! warning "Transaction Construction"
+    This API does **NOT** submit transactions on your behalf. You must:
+    - Build transactions client-side using the provided accounts/instructions
+    - Sign with your wallet keypair
+    - Submit to Solana RPC yourself
+    
+    The server only prepares the data you need.
+
+!!! info "Minimum Bet"
+    Minimum bet is **1,000,000 lamports (0.001 SOL)**, not 0.01 SOL as previously documented.
+
+!!! success "Rent Refunds"
+    Position accounts auto-close when claiming, refunding ~0.00113 SOL rent to you automatically.
 
 ---
 

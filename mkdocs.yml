@@ -22,7 +22,8 @@ nav:
   - Home: index.md
   - Guide:
       - Introduction: guide/introduction.md
-      - How To Play: guide/how-to-play.md
+      - How To Play (Mainnet): guide/how-to-play.md
+      - How To Play (Devnet): guide/how-to-play-devnet.md
       - Roadmap: guide/roadmap.md
   - Developers:
       - Quickstart: developers/quickstart.md
@@ -64,3 +65,5 @@ extra:
 
 plugins:
   - search
+  - git-revision-date-localized:
+      type: date

@@ -43,25 +43,22 @@ socket.on('disconnect', () => {
   "currentRoundId": 3995,
   "live": {
     "roundId": 3994,
-    "phase": "LIVE",
     "upPool": 1000000000,
     "downPool": 500000000,
-    "upPayout": 1.39,
-    "downPayout": 2.79,
-    "timeRemaining": 180000,
-    "startPrice": 250.50
+    "timeRemaining": 180000
   },
   "next": {
     "roundId": 3995,
-    "phase": "NEXT",
     "upPool": 0,
     "downPool": 0,
-    "upPayout": 1.96,
-    "downPayout": 1.96,
     "timeRemaining": 240000
   }
 }
 ```
+
+> **Note:** Payout multipliers (`upPayout`, `downPayout`) are **not** included in this event. Use the REST `GET /market` endpoint to get payouts, or calculate them from the pool values yourself.
+
+---
 
 ### bet_activity
 
@@ -73,11 +70,15 @@ socket.on('disconnect', () => {
 {
   "wallet": "ABC...",
   "username": "player123",
-  "amount": 100000000,
-  "side": "Up",
+  "amount": 0.1,
+  "side": "UP",
   "roundId": 3995
 }
 ```
+
+> **Note:** `amount` is in SOL (not lamports). `side` is `"UP"` or `"DOWN"` (uppercase).
+
+---
 
 ### round-settled
 
@@ -93,9 +94,13 @@ socket.on('disconnect', () => {
   "closePrice": 251.75,
   "upPool": 1000000000,
   "downPool": 500000000,
-  "winningPayout": 1.39
+  "totalPool": 1500000000,
+  "winningPayout": "1.39",
+  "timestamp": 1234567890
 }
 ```
+
+> **Note:** `winningPayout` is a string (e.g. `"1.39"`), not a number — do not call `.toFixed()` on it.
 
 ---
 
@@ -116,11 +121,18 @@ socket.on('connect_error', (err) => {
 });
 
 // Market updates (every 10s)
+// Note: upPayout/downPayout are NOT in this event — calculate from pools or use REST /market
 socket.on('market-update', (data) => {
   if (data.next) {
-    const { roundId, upPayout, downPayout, timeRemaining } = data.next;
-    console.log(`Round ${roundId}: UP ${upPayout.toFixed(2)}x | DOWN ${downPayout.toFixed(2)}x | ${Math.round(timeRemaining/1000)}s`);
-    
+    const { roundId, upPool, downPool, timeRemaining } = data.next;
+    const totalPool = (upPool + downPool) / 1e9;
+
+    // Calculate payouts from pool ratios (95% payout pool)
+    const upPayout = totalPool > 0 ? (totalPool * 0.95) / (upPool / 1e9) : 0;
+    const downPayout = totalPool > 0 ? (totalPool * 0.95) / (downPool / 1e9) : 0;
+
+    console.log(`Round ${roundId}: UP ~${upPayout.toFixed(2)}x | DOWN ~${downPayout.toFixed(2)}x | ${Math.round(timeRemaining / 1000)}s`);
+
     // Alert on high payout opportunities
     if (upPayout > 2.5 || downPayout > 2.5) {
       console.log('>>> HIGH PAYOUT DETECTED <<<');
@@ -129,14 +141,16 @@ socket.on('market-update', (data) => {
 });
 
 // Watch for bets
+// Note: amount is already in SOL — do NOT divide by 1e9
+// Note: side is "UP" or "DOWN" (uppercase)
 socket.on('bet_activity', (data) => {
-  const solAmount = data.amount / 1e9;
-  console.log(`${data.username || data.wallet.slice(0,8)} bet ${solAmount} SOL on ${data.side}`);
+  console.log(`${data.username || data.wallet.slice(0, 8)} bet ${data.amount.toFixed(3)} SOL on ${data.side}`);
 });
 
 // Round results
+// Note: winningPayout is a string — do NOT call .toFixed() on it
 socket.on('round-settled', (data) => {
-  console.log(`Round ${data.roundId}: ${data.outcome} wins at ${data.winningPayout.toFixed(2)}x`);
+  console.log(`Round ${data.roundId}: ${data.outcome} wins at ${data.winningPayout}x`);
   console.log(`Price: ${data.startPrice} → ${data.closePrice}`);
 });
 
@@ -157,7 +171,8 @@ process.on('SIGINT', () => {
 
 ## Tips
 
-- **Don't poll REST API** - Use WebSocket for real-time data
-- **Auto-reconnect** - Socket.io handles reconnection automatically
-- **Rate limits don't apply** - WebSocket events are push-only, no limits
-- **Combine with REST** - Use REST for auth and prepare-bet, WebSocket for monitoring
+- **Don't poll REST API** — Use WebSocket for real-time data
+- **Auto-reconnect** — Socket.io handles reconnection automatically
+- **Rate limits don't apply** — WebSocket events are push-only, no limits
+- **Combine with REST** — Use REST for auth and prepare-bet, WebSocket for monitoring
+- **Payouts via REST** — If you need payout multipliers, fetch `GET /market` separately or calculate from pool ratios
