@@ -17,10 +17,10 @@ SOLPREDS Community Markets is the first **fully decentralized prediction market*
 |---------|------------|--------|---------------------|
 | **Market Creation** | ❌ Curated | ❌ Regulated | ✅ Permissionless |
 | **Resolution** | Centralized UMA | Centralized CFTC | ✅ Decentralized Staking |
-| **Creator Earnings** | None | None | ✅ 1% volume + 2% payouts |
+| **Creator Earnings** | None | None | ✅ 1% trading fees + 1% liquidity jackpot |
 | **Trading Model** | Order Book | Order Book | ✅ Bonding Curve AMM |
 | **Barriers** | High liquidity needed | US citizens only | ✅ Open to all |
-| **Market Types** | Binary only | Binary only | ✅ Binary + Multi-Choice (10 outcomes) |
+| **Market Types** | Binary + Multi-Outcome | Binary only | ✅ Binary + Multi-Choice |
 
 ---
 
@@ -35,15 +35,15 @@ Anyone can create prediction markets:
 - "Will SOL flip ETH in TVL?"
 - "Will this memecoin bond in the next hour?"
 
-**Multi-Choice Markets (up to 10 outcomes):**
+**Multi-Choice Markets:**
 - "Who wins the 2026 World Cup?" → Brazil, Argentina, France, Germany...
 - "What will SOL price be Dec 31?" → <$100, $100-$200, $200-$500, >$500
 - "Which AI company IPOs first?" → OpenAI, Anthropic, xAI, Mistral
 
 **Creator Benefits:**
-- Earn **1% of all trading volume**
-- Earn **2% of final payouts**
-- No liquidity needed - bonding curve handles it
+- Earn **1% of all trading fees**
+- Earn **1% of the final liquidity jackpot** when market resolves
+- No liquidity needed — bonding curve handles it
 - Claimable earnings dashboard
 - Passive income from market activity
 
@@ -62,7 +62,7 @@ price_i = (b + shares_i) / (N × b + total_shares)
 
 Where:
 - `b` = dynamic virtual base (adjusts with volume)
-- `N` = number of outcomes (2 for binary, up to 10 for multi-choice)
+- `N` = number of outcomes (2 for binary, more for multi-choice)
 - `shares_i` = shares held for outcome i
 - `total_shares` = sum of all outcome shares
 
@@ -105,9 +105,12 @@ Markets resolve through a **3-phase staking system** with real economic stakes:
 
 #### Phase 1: Proposal
 - Market ends (auto at deadline)
-- Validators stake **10,000 $SOLPREDS** (~$200 USD) to propose outcome
+- Validators stake **10,000 $SOLPREDS** to propose outcome
 - **6-hour dispute window** begins
 - If undisputed → Validator earns **1% of market pot**
+
+!!! note "Stake Amount"
+    During beta, the stake is fixed at 10,000 virtual $SOLPREDS. On mainnet, the required stake targets ~$200 USD equivalent, calculated dynamically using the live $SOLPREDS price via Jupiter.
 
 #### Phase 2: Challenge Window (6 hours)
 
@@ -124,7 +127,7 @@ Markets resolve through a **3-phase staking system** with real economic stakes:
 
 #### Phase 3: Community Vote (24 hours - If Disputed)
 - All $SOLPREDS holders vote
-- Voting power = token balance (1 token = 1 vote)
+- Voting power is **balance-weighted** — larger holdings carry more influence
 - **Minimum 3 unique voters** required (quorum)
 - Majority wins
 
@@ -134,8 +137,8 @@ Markets resolve through a **3-phase staking system** with real economic stakes:
 - **25%** → Burned permanently
 
 **This ensures:**
-- ✅ Validators only propose correct outcomes (lose $200 if wrong)
-- ✅ Challengers only dispute when confident (lose $200 if wrong)
+- ✅ Validators only propose correct outcomes (lose stake if wrong)
+- ✅ Challengers only dispute when confident (lose stake if wrong)
 - ✅ Community votes accurately (earn from being right)
 - ✅ No centralized oracle needed
 
@@ -174,13 +177,15 @@ During beta testing, Community Markets operates with virtual assets:
 ### Claiming Winnings (5% of payout)
 | Recipient | Share |
 |-----------|-------|
-| Market Creator | 2% |
+| Market Creator | 1% |
 | Platform | 3% |
+| Validator Reward | 1% |
 
-**Total if you win:** ~8% (3% trade + 5% claim)
+!!! info "How Fees Apply"
+    The 3% trade fee is deducted when you buy or sell shares. The 5% claim fee is deducted from your payout when you claim winnings. They apply at different stages and to different amounts.
 
 !!! tip "Creator Earnings"
-    Popular markets generate passive income! A market with $10,000 volume earns creator $100 (1%) + 2% of final payouts. All earnings are claimable anytime.
+    Popular markets generate passive income! A market with $10,000 in trading volume earns the creator $100 (1% of fees) plus 1% of the final liquidity jackpot at resolution. All earnings are claimable anytime from the creator dashboard.
 
 ---
 
@@ -230,7 +235,7 @@ Your earnings:
 
 **SOLPREDS solves this:**
 - ✅ Permissionless validation
-- ✅ Economic penalties for lying ($200 stake loss)
+- ✅ Economic penalties for dishonest proposals (stake loss)
 - ✅ Community voting as backup
 - ✅ No single point of failure
 
@@ -255,21 +260,21 @@ Your earnings:
 ### Multi-Choice Markets
 
 **Unique to SOLPREDS:**
-- Up to 10 custom outcomes per market
+- Multiple custom outcomes per market
 - More nuanced predictions
 - Higher engagement
 - More trading opportunities
 
 **Examples:**
-- "Which team wins?" → 10 teams
-- "Price range prediction?" → 10 ranges
+- "Which team wins?" → Multiple teams
+- "Price range prediction?" → Multiple ranges
 - "Who's next president?" → Multiple candidates
 
 ---
 
 ## Example Markets
 
-Browse live markets at **[markets.solpreds.fun](https://markets.solpreds.fun)**
+Browse live markets at **[solpreds.fun](https://solpreds.fun)**
 
 !!! example "Active Markets"
     **Binary:**
@@ -278,9 +283,9 @@ Browse live markets at **[markets.solpreds.fun](https://markets.solpreds.fun)**
     - "Will SOL flip ETH in DeFi TVL?"
     
     **Multi-Choice:**
-    - "Who wins the 2026 World Cup?" (10 countries)
-    - "SOL price Dec 31?" (10 price ranges)
-    - "Which AI company IPOs first?" (5 companies)
+    - "Who wins the 2026 World Cup?" (multiple countries)
+    - "SOL price Dec 31?" (multiple price ranges)
+    - "Which AI company IPOs first?" (multiple companies)
 
 ---
 
@@ -294,7 +299,7 @@ Browse live markets at **[markets.solpreds.fun](https://markets.solpreds.fun)**
 | ✅ Creator Earnings Dashboard | Complete |
 | ✅ 5-Level Referrals | Complete |
 | ✅ Virtual Economy Beta | **Live Now** |
-| 🟡 $SOLPREDS Presale | Coming Soon |
+| 🟡 $SOLPREDS Presale | In Progress |
 | ⏳ Token Integration | After Presale |
 | ⏳ Mainnet Launch | Q2 2026 |
 | ⏳ On-Chain Program | Q3 2026 |
@@ -305,7 +310,7 @@ Browse live markets at **[markets.solpreds.fun](https://markets.solpreds.fun)**
 
 **Test Community Markets with virtual tokens:**
 
-👉 **[markets.solpreds.fun](https://markets.solpreds.fun)**
+👉 **[solpreds.fun](https://solpreds.fun)**
 
 **Join the $SOLPREDS presale:**
 
@@ -314,9 +319,10 @@ Browse live markets at **[markets.solpreds.fun](https://markets.solpreds.fun)**
 **Stay Connected:**
 - 🐦 [Twitter/X](https://x.com/SOLPREDS_FUN)
 - 💬 [Telegram](https://t.me/SOLPREDS)
+- 💬 [Discord](https://discord.gg/5EE29Xrc58)
 
 ---
 
 [Back to Home](index.md){ .md-button }
-[View Prediction Rounds](https://solpreds.fun){ .md-button .md-button--primary }
+[View Prediction Rounds](https://solpreds.fun/solana){ .md-button .md-button--primary }
 [Join Presale](https://presale.solpreds.fun){ .md-button .md-button--primary }
