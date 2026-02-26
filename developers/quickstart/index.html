@@ -1055,7 +1055,7 @@
 <p>Build bots to trade on the Solana prediction market.</p>
 <h2 id="what-the-api-does">What the API Does</h2>
 <ul>
-<li><strong>Market Data:</strong> Real-time rounds, pool sizes, liquidity, prices</li>
+<li><strong>Market Data:</strong> Real-time rounds, odds, liquidity, prices</li>
 <li><strong>Authentication:</strong> Wallet signature auth (non-custodial)</li>
 <li><strong>Trading:</strong> Prepare bet transactions for on-chain submission</li>
 <li><strong>WebSocket:</strong> Live updates for market changes and settlements</li>
@@ -1063,7 +1063,6 @@
 <h2 id="base-urls">Base URLs</h2>
 <p><strong>REST API:</strong> <code>https://solpreds.fun/api/bot</code><br />
 <strong>WebSocket:</strong> <code>wss://solpreds.fun</code></p>
-<hr />
 <h2 id="available-endpoints">Available Endpoints</h2>
 <table>
 <thead>
@@ -1079,7 +1078,7 @@
 <td><code>/market</code></td>
 <td>GET</td>
 <td>No</td>
-<td>Current round state, payouts, liquidity</td>
+<td>Current round state, odds, liquidity</td>
 </tr>
 <tr>
 <td><code>/history</code></td>
@@ -1104,12 +1103,6 @@
 <td>GET</td>
 <td>No</td>
 <td>SOL/USD price from Pyth</td>
-</tr>
-<tr>
-<td><code>/docs</code></td>
-<td>GET</td>
-<td>No</td>
-<td>Self-describing API reference</td>
 </tr>
 <tr>
 <td><code>/auth/nonce</code></td>
@@ -1143,7 +1136,6 @@
 </tr>
 </tbody>
 </table>
-<hr />
 <h2 id="authentication-flow">Authentication Flow</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>1. GET /auth/nonce?wallet=YOUR_WALLET
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>   → Returns { nonce, message, expiresIn }
@@ -1158,7 +1150,6 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>   Authorization: Bearer YOUR_TOKEN
 </code></pre></div>
 <p>Token expires in 24 hours.</p>
-<hr />
 <h2 id="quick-code-example">Quick Code Example</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">nacl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;tweetnacl&#39;</span><span class="p">);</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">bs58</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;bs58&#39;</span><span class="p">);</span>
@@ -1191,49 +1182,36 @@
 <a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">verifyRes</span><span class="p">.</span><span class="nx">json</span><span class="p">()).</span><span class="nx">token</span><span class="p">;</span>
 <a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="p">}</span>
 <a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>
-<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="c1">// 2. Get market data (includes payout multipliers)</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="c1">// 2. Get market data</span>
 <a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">getMarket</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API</span><span class="si">}</span><span class="sb">/market`</span><span class="p">);</span>
 <a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
 <a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="p">}</span>
 <a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>
 <a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="c1">// 3. Listen to WebSocket events</span>
-<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="c1">// Note: market-update sends pool sizes only, NOT payout multipliers.</span>
-<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="c1">// Use GET /market if you need upPayout/downPayout.</span>
-<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="kd">function</span><span class="w"> </span><span class="nx">connectWebSocket</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">io</span><span class="p">(</span><span class="s1">&#39;wss://solpreds.fun&#39;</span><span class="p">);</span>
-<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>
-<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="w">  </span><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;market-update&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">roundId</span><span class="p">,</span><span class="w"> </span><span class="nx">upPool</span><span class="p">,</span><span class="w"> </span><span class="nx">downPool</span><span class="p">,</span><span class="w"> </span><span class="nx">timeRemaining</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
-<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">totalPool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">upPool</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">downPool</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e9</span><span class="p">;</span>
-<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>
-<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="w">      </span><span class="c1">// Calculate payouts from pool ratios if needed</span>
-<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a><span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">upPayout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">totalPool</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">(</span><span class="nx">totalPool</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.95</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">upPool</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e9</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
-<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a><span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">downPayout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">totalPool</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">(</span><span class="nx">totalPool</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.95</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">downPool</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e9</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
-<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>
-<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a><span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Round #</span><span class="si">${</span><span class="nx">roundId</span><span class="si">}</span><span class="sb">: UP ~</span><span class="si">${</span><span class="nx">upPayout</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">)</span><span class="si">}</span><span class="sb">x | DOWN ~</span><span class="si">${</span><span class="nx">downPayout</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">)</span><span class="si">}</span><span class="sb">x | </span><span class="si">${</span><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">timeRemaining</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1000</span><span class="p">)</span><span class="si">}</span><span class="sb">s`</span><span class="p">);</span>
-<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a><span class="w">  </span><span class="p">});</span>
-<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>
-<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a><span class="w">  </span><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;round-settled&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a><span class="w">    </span><span class="c1">// winningPayout is sent as a string — do not call .toFixed() on it</span>
-<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Round #</span><span class="si">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">roundId</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">outcome</span><span class="si">}</span><span class="sb"> won at </span><span class="si">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">winningPayout</span><span class="si">}</span><span class="sb">x`</span><span class="p">);</span>
-<a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a><span class="w">  </span><span class="p">});</span>
-<a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a><span class="p">}</span>
-<a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>
-<a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a><span class="c1">// Run</span>
-<a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">authenticate</span><span class="p">();</span>
-<a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Authenticated:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">);</span>
-<a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>
-<a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">market</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getMarket</span><span class="p">();</span>
-<a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Current round:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">market</span><span class="p">.</span><span class="nx">currentRoundId</span><span class="p">);</span>
-<a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a>
-<a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a><span class="w">  </span><span class="nx">connectWebSocket</span><span class="p">();</span>
-<a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a><span class="p">})();</span>
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="kd">function</span><span class="w"> </span><span class="nx">connectWebSocket</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">io</span><span class="p">(</span><span class="s1">&#39;wss://solpreds.fun&#39;</span><span class="p">);</span>
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="w">  </span><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;market-update&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Market:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">next</span><span class="o">?</span><span class="p">.</span><span class="nx">upPayout</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">next</span><span class="o">?</span><span class="p">.</span><span class="nx">downPayout</span><span class="p">);</span>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="w">  </span><span class="p">});</span>
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="w">  </span><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;round-settled&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Round </span><span class="si">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">roundId</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">data</span><span class="p">.</span><span class="nx">outcome</span><span class="si">}</span><span class="sb"> won`</span><span class="p">);</span>
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="w">  </span><span class="p">});</span>
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="p">}</span>
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a><span class="c1">// Run</span>
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">authenticate</span><span class="p">();</span>
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Authenticated:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">);</span>
+<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>
+<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">market</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getMarket</span><span class="p">();</span>
+<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a><span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Current round:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">market</span><span class="p">.</span><span class="nx">currentRoundId</span><span class="p">);</span>
+<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>
+<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a><span class="w">  </span><span class="nx">connectWebSocket</span><span class="p">();</span>
+<a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a><span class="p">})();</span>
 </code></pre></div>
-<hr />
 <h2 id="websocket-events">WebSocket Events</h2>
 <table>
 <thead>
@@ -1247,28 +1225,26 @@
 <tr>
 <td><code>market-update</code></td>
 <td>Every 10s</td>
-<td>Round state, pool sizes, time remaining (payouts not included — calculate from pools or use REST <code>/market</code>)</td>
+<td>Round state, odds, time remaining</td>
 </tr>
 <tr>
 <td><code>bet_activity</code></td>
 <td>New bet placed</td>
-<td>wallet, amount (in SOL), side ("UP"/"DOWN"), roundId</td>
+<td>wallet, amount, side, roundId</td>
 </tr>
 <tr>
 <td><code>round-settled</code></td>
 <td>Round resolved</td>
-<td>roundId, outcome, startPrice, closePrice, winningPayout (string)</td>
+<td>roundId, outcome, prices, payout</td>
 </tr>
 </tbody>
 </table>
-<hr />
 <h2 id="rate-limits">Rate Limits</h2>
 <ul>
 <li><strong>Public endpoints:</strong> 100 req/min per IP</li>
 <li><strong>Authenticated endpoints:</strong> 100 reads/min, 10 writes/min per wallet</li>
 <li><strong>Headers:</strong> <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-Reset</code></li>
 </ul>
-<hr />
 <h2 id="next-steps">Next Steps</h2>
 <ul>
 <li><a href="../api-reference/">Full API Reference</a></li>
